@@ -1,0 +1,1486 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*********************************************************
+
+                        HEADER
+
+*********************************************************/
+
+
+header {
+    display: grid;
+    grid-template-columns: 160px 65% auto;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    width: 99%;
+    z-index: 1003;
+    padding: 3px;
+    background-color: white
+}
+
+main {
+    margin-top: 120px;
+}
+
+.logo {
+    margin: 0px 5px;
+    border: 1px solid black;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 95%;
+    border-radius: 5px;
+    background-size: contain;
+    background-position: center;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+.cabecera {
+    border: 1px solid darkgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.02em;
+    color: gray;
+    background-color: #eeeff3;
+    border-radius: 5px;
+    margin: 0px 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+.menulogin {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 10px;
+    border: 1px solid darkgrey;
+    background-color: #eeeff3;
+    border-radius: 5px;
+    margin-right: 10px;
+    position: relative;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+.datosUser {
+    display: flex;
+    width: 100%;
+}
+
+.imgCont {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.imgCont:hover {
+    background-color: lightgrey
+}
+
+.datosCont {
+    display: flex;
+    width: 100%;
+    margin: 010px 10%;
+
+}
+
+#profileImg {
+    width: 25px;
+}
+
+.nombre,
+.rol {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    color: maroon;
+
+}
+
+.datosCont>div>span {
+    font-size: 1.03em
+}
+
+
+
+/*****************************DROP DOWN ***********************************/
+
+.dropbtn {
+    color: black;
+    padding: 16px;
+    font-size: 0.9em;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 70%;
+    left: 20;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content .enlaceNav {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9em;
+}
+
+.dropdown-content .enlaceNav:hover {
+    background-color: #e5e6e9;
+    color: maroon;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #e5e6e9;
+    color: maroon;
+}
+
+.show {
+    display: block;
+}
+
+
+
+/****************************** ESTADISTICAS ********************************/
+#estadisticas {
+    display: flex;
+    width: 97%;
+    height: 350px;
+    margin: auto;
+    justify-content: space-around;
+}
+
+.estadistica {
+    height: 70%;
+    width: 31%;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: auto;
+    padding: 5px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cabeceraEstadisticas {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.cabeceraEstadisticas h3 {
+    border: 3px solid grey;
+    color: maroon;
+    background-color: lightgrey;
+    border-radius: 5px;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+}
+
+.infoView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    width: 60%;
+    margin: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border: 1px solid grey;
+    padding: 3px;
+
+}
+
+.infoView>.grupoInfo {
+    display: flex;
+    padding: 3px;
+    max-width: 100%;
+    /*     grid-template-columns: 60% 20%; */
+    /*     justify-content:center; */
+    /*     border:1px solid lightgray; */
+}
+
+.infoView>.grupoInfo>label {
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    font-size: 0.8em;
+    background-color: rgb(239, 222, 222);
+    width: 120px;
+}
+
+.infoView>.grupoInfo>.entradaValor2 {
+    border: 1px solid darkgray;
+    margin-left: 15px;
+}
+
+
+
+
+
+/********************************* BARRA NAVEGACION *************************/
+#navBar,
+#subMenu {
+    display: flex;
+    list-style-type: none;
+
+}
+
+#subMenu {
+    font-size: 0.85em;
+
+}
+
+.activo {
+    color: #b21122;
+}
+
+.inactivo {
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.inactivo:hover {
+    background-color: #e5e6e9;
+    border-radius: 3px;
+}
+
+.enlaceNav {
+    text-decoration: none;
+    padding: 10px;
+
+}
+
+.enlaceNav:hover {
+    background-color: #e5e6e9;
+    border-radius: 3px;
+}
+
+
+
+
+.elementoBusqueda {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    z-index: 1001;
+    background-color: white;
+}
+
+.elementoBusqueda span {
+    font-size: 20px;
+    color: red;
+}
+
+
+.centradorCabecera {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+}
+
+
+#cabeceraDatosClientes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid maroon;
+    color: maroon;
+    width: 100%;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(239, 222, 222);
+
+    position: fixed;
+    top: 150px;
+    width: 98%;
+    z-index: 1002;
+}
+
+#datosClientes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    margin: auto;
+    overflow: auto;
+    margin-top: 50px;
+    z-index: 999;
+}
+
+.divisor {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.divisorGris {
+    margin-top: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    height: 30px;
+    background-color: rgb(226, 231, 233);
+}
+
+#cabeceraDatosClientes article {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 1px;
+
+}
+
+.collapsible article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0px 1px;
+    text-align: start;
+
+}
+
+article {
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+}
+
+span {
+    font-size: 12px;
+}
+
+.collapsible article span {
+    font-size: 12px;
+    width: 80%;
+    text-align: center
+        /* para alinear los datos de las falsas tablas*/
+}
+
+.art4 {
+    width: 4%;
+    justify-content: flex-end;
+}
+
+.art4 span {
+    display: flex;
+    justify-content: center;
+}
+
+.art8 {
+    width: 8%;
+}
+
+.art8 span {
+    padding: 0px 2px;
+}
+
+.art10 {
+    width: 10%;
+}
+
+.art10 span {
+    padding: 0px 2px;
+}
+
+.art18 {
+    width: 18%;
+}
+
+.art18 span {
+    padding: 0px 2px;
+}
+
+.art20 {
+    width: 20%;
+}
+
+.art20 span {
+    padding: 0px 2px;
+}
+
+.art30 {
+    width: 30%;
+}
+
+.art30 span {
+    padding: 0px 2px;
+}
+
+
+
+.collapsible p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: maroon;
+    padding: 0px 8px;
+}
+
+#cabeceraDatosClientes p {
+    padding: 0px 3px;
+}
+
+p:hover {
+    cursor: pointer;
+}
+
+
+
+/* collapsible */
+
+.divisor:hover,
+.divisorGris:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.desplegable {
+    transition: max-height 0.3s ease-out;
+    max-height: 0;
+    visibility: collapse;
+}
+
+.visible {
+    max-height: 300px;
+    -webkit-transition: width 2s;
+    width: 99.5%;
+    transition: max-height 0.8s ease-out;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    /* padding: 5px; */
+    /* &#128393; */
+}
+
+/*   FORM'S     */
+
+.formularioAlta {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: #f1f1f1;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: auto;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.formularioAltaAviso {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: #f1f1f1;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: auto;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.changePassForm {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: #f1f1f1;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: auto;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.cabeceraForm {
+    display: flex;
+    background-color: rgb(239, 222, 222);
+    color: maroon;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.formDetalleCliente {
+    display: flex;
+    flex-direction: column;
+}
+
+.editorCliente {
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px
+}
+
+#idClienteLabel {
+    width: 80px
+}
+
+.editorNuevoCliente {
+    border-radius: 3px;
+    display: flex;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+.editorMaquina {
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 12% auto 12% auto;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+.contCheck {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    justify-content: center;
+    padding-left: 40px;
+}
+
+.contCheck .grupoCheck {
+    padding: 3px
+}
+
+.editorNuevaMaquina {
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 45% 15% auto;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+.editorNuevoAviso {
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 35% 38% 12% auto;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+.clienteForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 27%;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    margin: 0px 1%;
+    padding: 7px 15px;
+}
+
+.maquinaForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.avisoForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.imagenForm {
+    display: flex;
+    background-color: white;
+    border: none;
+}
+
+
+
+
+.grupoImagen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 3px;
+}
+
+#imagenMaquina,
+#imagenMaquinaDetalle {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+#modeloForm,
+#chasisForm,
+#notasForm {
+    text-transform: uppercase;
+}
+
+
+.grupo {
+    display: flex;
+    justify-content: flex-start;
+    padding: 4px 8px;
+}
+
+.editorNuevaMaquina .grupoCheck {
+    display: flex;
+    justify-content: center;
+    padding: 4px 8px;
+}
+
+.editorNuevoAviso .grupoCheck {
+    display: flex;
+    padding: 4px 8px;
+}
+
+.grupo label,
+.grupoCheck label {
+    padding: 3px 8px;
+    font-size: 12px;
+    width: 25%;
+}
+
+.grupo input[type=text] {
+    width: 80%;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
+
+.grupo input[type=date] {
+    width: 80%;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
+
+.grupo input[type=email] {
+    width: 80%;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    text-overflow: ellipsis;
+}
+
+.grupo input[type="checkbox"] {
+    border: 1px solid black;
+    width: 30%;
+
+}
+
+.grupo select,
+option {
+    width: 80%;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    text-overflow: ellipsis;
+}
+
+.grupo textarea {
+    width: 80%;
+    height: 90%;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.grupo textarea::placeholder {
+    text-transform: capitalize;
+}
+
+.grupo input:focus,
+.grupo select:focus,
+.grupo textarea:focus,
+.grupo input[type="checkbox"]:focus,
+.grupoCheck input[type="checkbox"]:focus {
+    box-shadow: 0 0 5px 3px pink;
+}
+
+.entradaValor2 input[type=text],
+span {
+    text-transform: capitalize;
+}
+
+
+
+
+input .checkBaja {
+    width: 10%;
+    border: 1px solid black;
+}
+
+.linkView {
+    color: blue;
+}
+
+.linkView:hover {
+    cursor: pointer;
+    background-color: lightskyblue !important;
+    box-shadow: 0 0 5px 3px lightblue;
+}
+
+.linkView:focus {
+    box-shadow: 0 0 5px 3px lightblue !important;
+}
+
+.botonera {
+    border-radius: 3px;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+.infoAviso {
+    /* display: flex; */
+    /* oculto */
+    display: none;
+    justify-content: center;
+}
+
+.infoAviso span {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.infoAviso label {
+    margin-left: 15px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.infoAviso span {
+    color: blue;
+}
+
+.btnForm2 {
+    padding: 2px 50px;
+    margin: 0px 15px;
+    background-color: maroon;
+    color: white;
+    font-size: 13px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    width: 15%;
+    text-align: center;
+}
+
+.btnForm2:hover {
+    /* box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); */
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 6px 12px 0 rgba(0, 0, 0, 0.14);
+
+    cursor: pointer;
+}
+
+.btnForm2:active {
+    transform: scale(1.05, 1.05);
+    background-color: rgb(69, 2, 2);
+}
+
+#saveFormClienteBt:disabled,
+#deshacerClienteBt:disabled {
+    background-color: gray;
+
+}
+
+
+.avisoClienteDetalle:hover,
+.avisoMaquinaetalle:hover {
+    cursor: pointer !important;
+}
+
+/*************************************************************
+
+                            MODAL's
+
+*************************************************************/
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    margin: auto;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.modal-content {
+    background-color: rgb(231, 231, 231);
+    margin: 10% 30%;
+    padding: 1%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.modalAvisoDetalle {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    /* padding: 0.5rem; */
+    background-color: #efdede;
+    border-bottom: 1px solid #ccc;
+    color: maroon;
+    padding: 0px 20px;
+}
+
+.modal-content-aviso {
+    background-color: rgb(231, 231, 231);
+    margin: 10% 10%;
+    padding: 1%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.cerrar {
+    justify-content: flex-end;
+}
+
+.mensaje {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+}
+
+.botonesModal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10px;
+
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*************************  info averias ***************/
+#infoDetalle {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    padding-top: 10px;
+    width: 82%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.infoMaquina,
+.infoCliente {
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 95%;
+    height: 320px;
+    border-radius: 3px;
+}
+
+#contenidoInfoCliente,
+#contenidoInfoMaquina {
+    height: 250px;
+    overflow: auto;
+}
+
+.infoMaquina article,
+.infoCliente article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cabeceraInfoMaquina {
+    display: grid;
+    /* grid-template-columns: 5% 15% 40% 10% 10% 10%; */
+    grid-template-columns: 3% 12% 55% 7% 4% 3%;
+
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid maroon;
+    color: maroon;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(239, 222, 222);
+}
+
+.cabeceraInfoCliente {
+    display: grid;
+    /* grid-template-columns: 5% 15% 15% 40% 10% 5% 5%; */
+    grid-template-columns: 3% 15% 12% 52% 7% 4% 3%;
+
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid maroon;
+    color: maroon;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(239, 222, 222);
+}
+
+.cabeceraChasis,
+.cabeceraCliente {
+    display: flex;
+    background-color: maroon;
+    color: white;
+    align-items: center;
+    justify-content: space-around;
+    height: 30px;
+    border-radius: 3px;
+    padding: 0px 15px;
+}
+
+.infoMaquina span,
+.infoCliente span {
+    font-size: 10px;
+    /* overflow: ellipsis !important; */
+}
+
+.infoMaquina .divisor,
+.infoMaquina .divisorGris {
+    display: grid;
+    /* grid-template-columns: 5% 15% 40% 10% 10% 10%; */
+    grid-template-columns: 3% 12% 55% 7% 4% 3%;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+.infoCliente .divisor,
+.infoCliente .divisorGris {
+    display: grid;
+    /* grid-template-columns: 5% 15% 15% 40% 10% 5% 5%; */
+    grid-template-columns: 3% 15% 12% 52% 7% 4% 3%;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+.avisoAveria {
+    text-align: left !important;
+    text-overflow: ellipsis !important;
+}
+
+.detalleAveria {
+    white-space: nowrap;
+    /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    /* Oculta el desbordamiento del contenido */
+    text-overflow: ellipsis !important;
+    /* Muestra los puntos suspensivos (...) */
+    width: 100%;
+    /* Asegúrate de que el elemento tenga un ancho definido */
+}
+
+/**********  AVISOS PENDIENTES *************/
+span.icon {
+    font-size: 25px;
+}
+
+article.recycled {
+    display: flex;
+    justify-content: center;
+
+}
+
+.cabeceraInfoAvisosPendientes {
+    display: grid;
+    /* grid-template-columns: 5% 8% 10% 5% 10% 5% 14% 14% 10% 5% 5%; */
+    grid-template-columns: 2% 8% 11% 4% 8% 4% 24% 15% 7% 4% 2%;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid maroon;
+    color: maroon;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(239, 222, 222);
+    text-align: center;
+}
+
+.cabeceraInfoAvisosPendientes article {
+    margin: auto;
+
+}
+
+.cabeceraInfoAvisosPendientes article span {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.ghost {
+    display: none;
+}
+
+.ordenaTabla {
+    display: flex;
+    justify-content: space-around;
+    display: flex;
+    width: 100%;
+}
+
+.contenidoInfoAveria {
+    height: 530px;
+    overflow: auto;
+}
+
+
+.contenidoInfoAveria .divisor,
+.contenidoInfoAveria .divisorGris {
+    display: grid;
+    grid-template-columns: 2% 8% 11% 4% 8% 4% 24% 15% 7% 4% 2%;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+.contenidoInfoAveria .divisor article,
+.contenidoInfoAveria .divisorGris article {
+    margin: auto;
+    width: 100%;
+    height: 80%;
+}
+
+.lineaAviso input:not([type="checkbox"]) {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 80%;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.lineaAviso input:disabled {
+    color: black;
+}
+
+.lineaAviso input[type="checkbox"] {
+    width: 100%;
+}
+
+.lineaAviso input:focus,
+.lineaAviso select:focus {
+    border: none;
+    outline: 1px solid lightgray;
+    background-color: lightyellow;
+}
+
+.lineaAviso select {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    appearance: none;
+    /*quita la flecha del select*/
+    text-align: center;
+    font-size: 12px;
+}
+
+.campoCliente {
+    padding-left: 15px;
+    text-overflow: ellipsis;
+}
+
+.campoNumero {
+    text-align: center;
+}
+
+.ordenaTabla:hover {
+    cursor: pointer;
+}
+
+
+.enlazable:hover {
+    box-shadow: 0 0 5px 3px grey !important;
+}
+
+.enlazable input:hover,
+.enlazable select:hover {
+    cursor: pointer !important;
+}
+
+/**   filtro de avisos pendientes por productores  */
+
+#cabeceraAvisos {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    margin-bottom: 5px;
+}
+
+.uptAvisos {
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 5px;
+    font-size: 12px;
+    background-color: lightgray;
+    color: maroon;
+    border-radius: 3px;
+    /* width: 8%; */
+    align-items: center;
+}
+
+#cAvisos {
+    border: 1px solid lightgrey;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    justify-content: space-around;
+    color: maroon;
+    font-size: 1.6em;
+    font-weight: bold;
+    border: 1px solid maroon;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#lineaProductores,
+#avisosTotales,
+#uptAvisosCont {
+    border: 1px solid lightgrey;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    justify-content: space-around;
+}
+
+.productorArt {
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 5px;
+    font-size: 10px;
+    background-color: lightgray;
+    color: maroon;
+    border-radius: 3px;
+    width: 8%;
+    align-items: center;
+}
+
+.productorArt:hover,
+.uptAvisos:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 3px lightgrey;
+}
+
+.productorArt:active,
+.uptAvisos:active {
+    transform: scale(0.95);
+}
+
+/*************************** FLECHAS DE REGISTROS *************************/
+
+#casette {
+    display: grid;
+    grid-template-columns: 10% 10% auto 10% 10% 10%;
+    justify-content: space-around;
+    align-items: center;
+    width: 16%;
+    margin: auto;
+    margin-bottom: 10px;
+    /* border: 1px solid lightgrey; */
+    border-radius: 8px;
+    padding: 3px;
+    overflow: hidden
+}
+
+#nAvisos {
+    width: 50px;
+    text-align: center;
+    height: 17px;
+}
+
+.flechaAviso {
+    font-size: 14px;
+    color: maroon;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    background-color: lightgrey;
+    padding: 2px 3px;
+
+
+}
+
+.flechaAviso:hover {
+    cursor: pointer;
+    box-shadow: 0cap 0 5px gray;
+    transform: scale(1.15);
+}
+
+.flechaAviso:active {
+    transform: scale(0.95);
+    box-shadow: 0cap 0 5px black;
+}
+
+/************************** RECYCLER CLIENTES ***************************/
+
+#datosClientesRecycler {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    border: 1px solid grey;
+    height: 600px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+/************************** pruebas de overflow con maquinas  ************************/
+#datosMaquinas {
+    overflow: auto;
+
+    /*     position: fixed; */
+    /*     top: 180px; */
+    margin-top: 50px;
+    /*     width: 98%; */
+    z-index: 999;
+}
+
+
+/***************************** MENU LOGIN ****************************/
+
+.cabeceraFormLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: maroon;
+    background-color: rgb(239, 222, 222);
+    margin-bottom: 20px;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+
+}
+
+
+
+
+.grupoLogin {
+    display: grid;
+    grid-template-columns: 30% auto;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+.error {
+    height: 25px;
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.formularioLogin {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: #f1f1f1;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: auto;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.grupoLogin input {
+    border-radius: 3px;
+    border: 1px solid grey;
+
+    box-sizing: border-box;
+    height: 30px;
+
+}
+
+.grupoLogin input:focus {
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.24), 0 7px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.grupoLogin input:hover {
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.24), 0 7px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.btnForm3 {
+    padding: 6px 50px;
+    margin-top: 20px;
+    background-color: maroon;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    width: 15%;
+    text-align: center;
+}
+
+
+.btnForm3:hover {
+    /* box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); */
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 6px 12px 0 rgba(0, 0, 0, 0.14);
+
+    cursor: pointer;
+}
+
+.btnForm3:active {
+    transform: scale(1.05, 1.05);
+    background-color: rgb(69, 2, 2);
+}
+
+.formularioAltaUsuario {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    background-color: #f1f1f1;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: auto;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+#usuariosList {
+    margin: auto;
+    width: 65%;
+    border: 1px solid lightgrey;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 5px;
+}
+
+.cabeceraInfoUsuarios {
+    display: grid;
+    grid-template-columns: 3% 18% 12% 5% 15% 15%;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid maroon;
+    color: maroon;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(239, 222, 222);
+    overflow: auto;
+}
+
+.lineaUsuario {
+    display: grid;
+    grid-template-columns: 3% 18% 12% 5% 15% 15%;
+}
+
+.lineaUsuario article {
+    height: 30px;
+}
+
+.lineaUsuario select {
+    width: 100%
+}
+
+.lineaUsuario input {
+    width: 100%;
+}
+
+.colDoble {
+    grid-column-start: 5;
+    grid-column-end: 7;
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+
+.btnForm4 {
+    font-size: 0.62em;
+    color: maroon;
+    background-color: lightgrey;
+    border-radius: 5px;
+    width: 110%;
+    height: 70%;
+    cursor: pointer;
+}
+
+.btnForm4:hover {
+    background-color: darkgrey;
+}
+
+.btnForm4:active {
+    transform: scale(0.9);
+}
+
+
+/************************** UNICODE ************************************/
+
+/*
+&#11206; triangulo hacia abajo
+&#11205; triangulo hacia arriba
+&#11208; triangulo hacia derecha
+
+&#129031;  flecha para abajo
+&#129029;  flecha para arriba
+
+*/

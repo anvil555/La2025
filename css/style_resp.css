@@ -1,0 +1,254 @@
+@media (max-width: 600px) {
+  header {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    height: auto;
+    left: 5px;
+    width: 95%;
+  }
+
+  main {
+    margin-top: 200px;
+    width: 100%
+  }
+
+  .logo {
+    grid-row: 1;
+    margin: 10px 10px;
+    border-radius: 5px;
+    height: 105%;
+    border: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .cabecera {
+    position: absolute;
+    grid-column: 1/-1;
+    grid-row: 2;
+    align-items: flex-start;
+    width: 100%;
+    height: 88px;
+    margin: 25px 0px;
+    overflow: hidden;
+    box-shadow: 2px 2px 2px 2px darkgrey;
+  }
+
+  .menulogin {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    grid-column: 2;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top: 10px;
+    margin: 10px 0px;
+    box-shadow: 2px 2px 2px 2px darkgrey;
+
+  }
+
+  #profileImg {
+    width: 25px
+  }
+
+  .datosUser {
+    width: 100%
+  }
+
+  .dropdown-content {
+    position: absolute;
+    /* box-shadow: none; */
+  }
+
+  .dropbtn {
+    width: 100%;
+  }
+
+  .dropdown-content.show {
+    display: block;
+  }
+
+  .navBar {
+    width: 100%;
+  }
+
+  #navBar {
+    margin: 0;
+    padding: 10px;
+  }
+
+  #submenu {
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .infoView{
+    width: 100%;
+    
+  }
+  
+
+  .estadistica,
+  .delUser,
+  .grupoImagen,
+  #menuClientes,
+  #menuMaquinas,
+  #changePass,
+  #deleteUser,
+  #nuevoUsuario,
+  #infoDetalle,
+  .cabeceraInfoAvisosPendientes,
+  .rol {
+    display: none;
+  }
+
+  /** modal del login  */
+  .modal-content {
+    width: 92%;
+    margin: 70px 10px;
+  }
+
+
+  .grupo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 3px
+  }
+
+  .grupo label {
+    width: 100%;
+    margin: 0px 3px;
+    font-size: 10px;
+    color: grey;
+  }
+
+  .grupo input,
+  .grupo select,
+  .grupo textarea {
+    width: 95% !important;
+    margin: 2px 3px;
+    font-size: 11px;
+    padding: 2px;
+    height: 20px;
+    border: 0.5px solid lightgrey;
+  }
+
+  .grupoImagen {
+    height: 100%;
+  }
+
+  #cabeceraAvisos {
+    position: fixed;
+    top: 0;
+    /* left: 5px; */
+    width: 94%;
+    z-index: 1000;
+    margin: auto;
+    margin-top: 200px;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    height: auto;
+    border: none;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px darkgrey;
+
+    border: 0.5px solid lightgray;
+    border-radius: 3px;
+    padding: 3px;
+  }
+
+  #cAvisos {
+    grid-row: 1;
+    width: 50%;
+    margin-top: 5px
+  }
+
+  #uptAvisosCont {
+    border: none;
+    margin-bottom: px;
+    margin-top: 10px
+  }
+
+  #lineaProductores {
+    grid-column: 1/-1;
+    grid-row: 2;
+    background-color: white;
+    overflow: auto;
+  }
+
+  #lineaProductores>.productorArt {
+    width: 50%;
+    padding: 2px;
+    margin: 5px 0;
+  }
+
+  #contenidoInfoAveria {
+    position: relative;
+    width: 96%;
+    top: 0;
+    margin-top: 305px;
+    border: 0.5px solid lightgray;
+  }
+
+  .fechaSltArt,
+  .selectPrioArt,
+  .presuChkArt,
+  .aceptChkArt,
+  .campoNumeroArt,
+  .resolucionArt {
+    display: none;
+  }
+
+  .contenidoInfoAveria .divisor,
+  .contenidoInfoAveria .divisorGris {
+    display: grid;
+    grid-template-columns: 5% 24% 25% 30% 10%;
+  }
+
+  .enlazable>.entradaValor2 {
+    font-size: 10px
+  }
+
+  /***************************** USUARIOS ******************************/
+  #cerrarSesion {}
+
+  #usuariosList {
+    width: 100%;
+    /*     display: grid;
+    grid-template-columns: auto; */
+  }
+
+  .cabeceraInfoUsuarios {
+    display: grid;
+    grid-template-columns: 5% 25% 20% 8% 25%;
+  }
+
+  .lineaUsuario {
+    display: grid;
+    grid-template-columns: 5% 25% 20% 8% 30%;
+  }
+
+  .formularioAltaAviso {
+    width: 100%;
+  }
+
+  form .editorNuevoAviso {
+    display: grid;
+    grid-template-columns: 100%
+  }
+
+  #casette {
+    width: 100%
+  }
+
+  .cabeceraEstadisticas h3{
+    width: 80%;
+
+  }
+  .infoView{
+    width: 100%;
+  }
+
+}

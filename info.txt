@@ -10,5 +10,7 @@ para entrar a la aplicacion con rol de admin
 usuario: profesor
 password: profesor
 
-o puedes registrar un nuevo usuario pero entrarás con el rol de user
+O puedes registrar un nuevo usuario pero entrarás con el rol de user
+
+https://github.com/anvil555/La2025.git
 

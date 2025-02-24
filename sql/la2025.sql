@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-02-2025 a las 00:25:40
+-- Tiempo de generación: 24-02-2025 a las 00:55:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -461,6 +461,24 @@ ALTER TABLE `maquinas`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `avisos`
+--
+ALTER TABLE `avisos`
+  ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `clientes` (`id`),
+  ADD CONSTRAINT `avisos_ibfk_2` FOREIGN KEY (`chasis`) REFERENCES `maquinas` (`chasis`),
+  ADD CONSTRAINT `avisos_ibfk_3` FOREIGN KEY (`productor`) REFERENCES `productores` (`id`);
+
+--
+-- Filtros para la tabla `maquinas`
+--
+ALTER TABLE `maquinas`
+  ADD CONSTRAINT `maquinas_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `clientes` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -53,11 +53,11 @@ class La2024View {
                         <div class="nombre">
                             <span>${usuario.username}</span>
                         </div>
-                        <div class="rol">
-                            <span>${usuario.rol}</span>
-                        </div>
                     </div>
                     <div class="dropdown-content" id="menuCurrentUser">
+                        <article class="enlaceNav inactivo">
+                            <span>${usuario.rol}</span>
+                        </article>
                         <div class="enlaceNav inactivo" id="changePass" data-option="changePassDrop">Cambiar Pass</div>
                         <div class="enlaceNav inactivo" id="deleteUser" data-option="deleteUserDrop">Eliminar Perfil</div>
                         <div class="enlaceNav inactivo" id="cerrarSesion" data-option="cerrarSesion">Cerrar Sesión</div>
@@ -526,54 +526,55 @@ class La2024View {
     }
     showCabeceraBusqueda() {
         this.main.replaceChildren();
-        this.main.insertAdjacentHTML('afterbegin', `   
-            <section class="elementoBusqueda">
-                <article>
-                        <label for="nombreClienteBusqueda">Busqueda:</label>
-                        <input class="entradaValor3" type="text" name="nombreClienteBusqueda" id="nombreClienteBusqueda">
-                 </article>  
-                <article>
-                    <h3>Clientes encontrados: <span id="nClientes"></span></h3>
-                </article>
-            </section>
+        this.main.insertAdjacentHTML('afterbegin', ` 
+        <section class="elementoBusqueda">
+            <article class="cuadroBusqueda">
+                <label for="nombreClienteBusqueda"></label>
+                <img src="./images/lupa.png" alt="lupa" style="max-width: 7%;">
+                <input class="entradaValor3" type="text" name="nombreClienteBusqueda" id="nombreClienteBusqueda">
+            </article>
+            <article>
+                <span id="nClientes">0</span>
+            </article>
+        </section>
         <div class="centradorCabecera" class="falsaTabla">
-        <section id="cabeceraDatosClientes">
-            <article class="art4">
-                <span>ID</span>
-            </article>
-            <article class="art18">
-                <span>NOMBRE</span>
-            </article>             
-            <article class="art18">
-                <span>DIRECCION</span>
-            </article>
-            <article class="art10">
-                <span>POBLACION</span>
-            </article>
-            <article  class="art8">
-                <span>PROVINCIA</span>
-            </article>
-            <article  class="art8"> 
-                <span>CONTACTO</span>
-            </article>
-            <article  class="art8">
-                <span>TELEFONO</span>
-            </article>
-            <article  class="art10">
-                <span>MAIL</span>
-            </article>
-            <article  class="art4">
-                <span>BAJA</span>
-            </article>
-            
-                <!-- <p>&#128393;</p> -->
-                 <p>&#x1F527;</p>
-            
-        </section>
-        <section id="datosClientes">
+            <section id="cabeceraDatosClientes">
+                <article class="art4">
+                    <span>ID</span>
+                </article>
+                <article class="art18">
+                    <span>NOMBRE</span>
+                </article>             
+                <article class="art18">
+                    <span>DIRECCION</span>
+                </article>
+                <article class="art10">
+                    <span>POBLACION</span>
+                </article>
+                <article  class="art8">
+                    <span>PROVINCIA</span>
+                </article>
+                <article  class="art8"> 
+                    <span>CONTACTO</span>
+                </article>
+                <article  class="art8">
+                    <span>TELEFONO</span>
+                </article>
+                <article  class="art10">
+                    <span>MAIL</span>
+                </article>
+                <article  class="art4">
+                    <span>BAJA</span>
+                </article>
+                
+                    <!-- <p>&#128393;</p> -->
+                    <p>&#x1F527;</p>
+                
+            </section>
+            <section id="datosClientes">
 
-        </section>
-    </div>
+            </section>
+        </div>
         
         `)
     }
@@ -1379,51 +1380,50 @@ class La2024View {
         this.main.replaceChildren();
         this.main.insertAdjacentHTML('afterbegin', `   
             <section class="elementoBusqueda">
-                <article>
-                        <label for="nombreMaquinaBusqueda">Busqueda:</label>
-                        <input class="entradaValor3" type="text" name="nombreMaquinaBusqueda" id="nombreMaquinaBusqueda">
-                 </article>  
-                <article>
-                    <h3>Máquinas encontradas: <span id="nMaquinas"></span></h3>
+                <article class="cuadroBusqueda">
+                    <label for="nombreMaquinaBusqueda"></label>
+                    <img src="./images/lupa.png" alt="lupa" style="max-width: 7%;">
+                    <input class="entradaValor3" type="text" name="nombreMaquinaBusqueda" id="nombreMaquinaBusqueda">
                 </article>
-            </section>
+                <article>
+                    <span id="nMaquinas">0</span>
+                </article>
+            </section>               
             <div class="centradorCabecera" class="falsaTabla">
-        <section id="cabeceraDatosClientes">
-            <article class="art10">
-                <span>MODELO</span>
-            </article>  
-            <article class="art4">
-                <span>NUMERO</span>
-            </article>           
-            <article class="art18">
-                <span>CHASIS</span>
-            </article>
-            <article class="art18">
-                <span>CLIENTE</span>
-            </article>
-            <article  class="art10">
-                <span>FECHA</span>
-            </article>
-            <article class="art10">
-                <span>ALQUILER</span>
-            </article>
-            <article  class="art10">
-                <span>REACO</span>
-            </article>
-            <article  class="art10"> 
-                <span>CONTRATO</span>
-            </article>        
-            <article  class="art10">
-                <span>BAJA</span>
-            </article>
-            
-                <!-- <p>&#128393;</p> -->
-                 <p>&#x1F527;</p>
-            
-        </section>
-        <section id="datosMaquinas">
-        </section>
-    </div>    
+                <section id="cabeceraDatosClientes">
+                    <article class="art10">
+                        <span>MODELO</span>
+                    </article>  
+                    <article class="art4">
+                        <span>NUMERO</span>
+                    </article>           
+                    <article class="art18">
+                        <span>CHASIS</span>
+                    </article>
+                    <article class="art18">
+                        <span>CLIENTE</span>
+                    </article>
+                    <article  class="art10">
+                        <span>FECHA</span>
+                    </article>
+                    <article class="art10">
+                        <span>ALQUILER</span>
+                    </article>
+                    <article  class="art10">
+                        <span>REACO</span>
+                    </article>
+                    <article  class="art10"> 
+                        <span>CONTRATO</span>
+                    </article>        
+                    <article  class="art10">
+                        <span>BAJA</span>
+                    </article>                    
+                        <!-- <p>&#128393;</p> -->
+                    <p>&#x1F527;</p>                    
+                </section>
+                <section id="datosMaquinas">
+                </section>
+            </div>    
         `);
     }
     bindBusquedaMaquinas(handler) {

@@ -98,6 +98,10 @@
   #deleteUser,
   #nuevoUsuario,
   #infoDetalle,
+  #datosClientes,
+  #datosMaquinas,
+  .elementoBusqueda,
+  #cabeceraDatosClientes,
   .cabeceraInfoAvisosPendientes,
   .rol {
     display: none;
@@ -186,9 +190,9 @@
 
   #contenidoInfoAveria {
     position: relative;
-    width: 96%;
+    width: 100%;
     top: 0;
-    margin-top: 305px;
+    margin-top: 310px;
     border: 0.5px solid lightgray;
   }
 

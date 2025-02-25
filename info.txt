@@ -14,3 +14,14 @@ O puedes registrar un nuevo usuario pero entrarás con el rol de user
 
 https://github.com/anvil555/La2025.git
 
+25/02/2025
+
+Actualizado style.css
+Actualizado style_resp.css
+Actualizado la2024View.js
+
+
+Modificado elemento de busqueda de clientes y maquinas. Se añade lupa
+
+Modificado desplegable de usuario. se elimina el rol en el menulogin y se añade al desplegable
+

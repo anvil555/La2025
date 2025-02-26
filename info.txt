@@ -25,3 +25,6 @@ Modificado elemento de busqueda de clientes y maquinas. Se añade lupa
 
 Modificado desplegable de usuario. se elimina el rol en el menulogin y se añade al desplegable
 
+26/02/2025
+
+Añadida presentación powerpoint

@@ -26,17 +26,8 @@ class La2024View {
                             <a class="enlaceNav inactivo" href="#" id='home' data-option='home'>Home</a>
                         </li>
                         <li class="">
-                            <a class="enlaceNav inactivo" href="#" id='menuClientes' data-option='menuClientes'>Clientes</a>
-                        </li>
-                        <li class="">
-                            <a class="enlaceNav inactivo" href="#" id='menuMaquinas' data-option='menuMaquinas'>Máquinas</a>
-                        </li>
-                        <li class="">
                             <a class="enlaceNav inactivo" href="#" id='menuAvisos' data-option='menuAvisos'>Avisos</a>
-                        </li>
-                       <!-- <li class="">
-                            <a class="enlaceNav inactivo" href="#" id='menuOpciones' data-option='menuOpciones'>Opciones</a>
-                        </li> -->
+                        </li>                     
                     </ul>                
                 </nav>
                 <nav class="navBar">
@@ -69,6 +60,28 @@ class La2024View {
 
         switch (usuario.rol) {
             case "admin":
+                let clienteLi = document.createElement('li');
+                let enlaceClientes = document.createElement('a');
+                enlaceClientes.classList.add('enlaceNav');
+                enlaceClientes.classList.add('inactivo');
+                enlaceClientes.setAttribute('id', 'menuClientes');
+                enlaceClientes.setAttribute('data-option', 'menuClientes');
+                enlaceClientes.setAttribute('href', '#');
+                enlaceClientes.innerHTML = 'Clientes';
+                clienteLi.appendChild(enlaceClientes);
+                navBar.appendChild(clienteLi);
+
+                let maquinaLi = document.createElement('li');
+                let enlaceMaquinas = document.createElement('a');
+                enlaceMaquinas.classList.add('enlaceNav');
+                enlaceMaquinas.classList.add('inactivo');
+                enlaceMaquinas.setAttribute('id', 'menuMaquinas');
+                enlaceMaquinas.setAttribute('data-option', 'menuMaquinas');
+                enlaceMaquinas.setAttribute('href', '#');
+                enlaceMaquinas.innerHTML = 'Máquinas';
+                maquinaLi.appendChild(enlaceMaquinas);
+                navBar.appendChild(maquinaLi);
+
                 let adminLi = document.createElement('li');
                 let enlaceAdmin = document.createElement('a');
                 enlaceAdmin.classList.add('enlaceNav');
@@ -147,106 +160,106 @@ class La2024View {
 
         })
 
-        let menuClientes = document.getElementById('menuClientes');
-        menuClientes.addEventListener('click', (event) => {
-            for (let i of navBar) {
-                i.classList.remove('activo');
-                i.classList = "inactivo";
-            }
-            menuClientes.classList = "enlaceNav activo";
-            console.log(event.currentTarget.dataset.option);//se puede coger el data-option
-            handler(event.currentTarget.dataset.option);
+        // let menuClientes = document.getElementById('menuClientes');
+        // menuClientes.addEventListener('click', (event) => {
+        //     for (let i of navBar) {
+        //         i.classList.remove('activo');
+        //         i.classList = "inactivo";
+        //     }
+        //     menuClientes.classList = "enlaceNav activo";
+        //     console.log(event.currentTarget.dataset.option);//se puede coger el data-option
+        //     handler(event.currentTarget.dataset.option);
 
-            let subMenu = document.getElementById('subMenu');
+        //     let subMenu = document.getElementById('subMenu');
 
-            subMenu.replaceChildren();
-            subMenu.insertAdjacentHTML('beforeend', `            
-                <li class="">
-                    <a class="enlaceNav inactivo option" href="#" id='altaCliente' data-option='altaCliente'>Nuevo Cliente</a>
-                </li>
-                <li class="">
-                    <a class="enlaceNav inactivo option" href="#" id='modificaCliente' data-option='modificaCliente'>Modificar Cliente</a>
-                </li>    
-               <!--  <li class="">
-                    <a class="enlaceNav inactivo option" href="#" id='historicoCliente' data-option='historicoCliente'>Histórico Cliente</a>
-                </li> -->      
-            `)
-            let subMenuLi = subMenu.querySelectorAll('li a');
-            let altaCliente = document.getElementById('altaCliente');
-            altaCliente.addEventListener('click', (event) => {
-                console.log('pulsado altaCliente')
+        //     subMenu.replaceChildren();
+        //     subMenu.insertAdjacentHTML('beforeend', `            
+        //         <li class="">
+        //             <a class="enlaceNav inactivo option" href="#" id='altaCliente' data-option='altaCliente'>Nuevo Cliente</a>
+        //         </li>
+        //         <li class="">
+        //             <a class="enlaceNav inactivo option" href="#" id='modificaCliente' data-option='modificaCliente'>Modificar Cliente</a>
+        //         </li>    
+        //        <!--  <li class="">
+        //             <a class="enlaceNav inactivo option" href="#" id='historicoCliente' data-option='historicoCliente'>Histórico Cliente</a>
+        //         </li> -->      
+        //     `)
+        //     let subMenuLi = subMenu.querySelectorAll('li a');
+        //     let altaCliente = document.getElementById('altaCliente');
+        //     altaCliente.addEventListener('click', (event) => {
+        //         console.log('pulsado altaCliente')
 
-                for (let i of subMenuLi) {
-                    // console.log(i)
-                    i.classList.remove('activo');
-                    i.classList = "inactivo";
-                }
-                altaCliente.classList = "enlaceNav activo";
+        //         for (let i of subMenuLi) {
+        //             // console.log(i)
+        //             i.classList.remove('activo');
+        //             i.classList = "inactivo";
+        //         }
+        //         altaCliente.classList = "enlaceNav activo";
 
-                //aqui el formulario de alta cliente
-                handler(event.currentTarget.dataset.option);
+        //         //aqui el formulario de alta cliente
+        //         handler(event.currentTarget.dataset.option);
 
 
-            })
-            let modificaCliente = document.getElementById('modificaCliente');
-            modificaCliente.addEventListener('click', (event) => {
+        //     })
+        //     let modificaCliente = document.getElementById('modificaCliente');
+        //     modificaCliente.addEventListener('click', (event) => {
 
-                for (let i of subMenuLi) {
-                    i.classList.remove('activo');
-                    i.classList = "inactivo";
-                }
-                modificaCliente.classList = "enlaceNav activo";
+        //         for (let i of subMenuLi) {
+        //             i.classList.remove('activo');
+        //             i.classList = "inactivo";
+        //         }
+        //         modificaCliente.classList = "enlaceNav activo";
 
-                // aqui el buscador de clientes
-                handler(event.currentTarget.dataset.option);
-            })
-        })
-        let menuMaquinas = document.getElementById('menuMaquinas');
-        menuMaquinas.addEventListener('click', (event) => {
+        //         // aqui el buscador de clientes
+        //         handler(event.currentTarget.dataset.option);
+        //     })
+        // })
+        // let menuMaquinas = document.getElementById('menuMaquinas');
+        // menuMaquinas.addEventListener('click', (event) => {
 
-            for (let i of navBar) {
-                i.classList.remove('activo');
-                i.classList = "inactivo";
-            }
-            menuMaquinas.classList = "enlaceNav activo";
-            console.log(event.currentTarget.dataset.option);
-            handler(event.currentTarget.dataset.option);
-            let subMenu = document.getElementById('subMenu');
-            subMenu.replaceChildren();
-            subMenu.insertAdjacentHTML('beforeend', `            
-                <li class="">
-                    <a class="enlaceNav inactivo" href="#" id='altaMaquina' data-option='altaMaquina'>Nueva Máquina</a>
-                </li>
-                <li class="">
-                    <a class="enlaceNav inactivo" href="#" id='modificaMaquina' data-option='modificaMaquina'>Modificar Máquina</a>
-                </li>      `)
-            let subMenuLi = subMenu.querySelectorAll('li a');
-            let altaMaquina = document.getElementById('altaMaquina');
-            altaMaquina.addEventListener('click', (event) => {
+        //     for (let i of navBar) {
+        //         i.classList.remove('activo');
+        //         i.classList = "inactivo";
+        //     }
+        //     menuMaquinas.classList = "enlaceNav activo";
+        //     console.log(event.currentTarget.dataset.option);
+        //     handler(event.currentTarget.dataset.option);
+        //     let subMenu = document.getElementById('subMenu');
+        //     subMenu.replaceChildren();
+        //     subMenu.insertAdjacentHTML('beforeend', `            
+        //         <li class="">
+        //             <a class="enlaceNav inactivo" href="#" id='altaMaquina' data-option='altaMaquina'>Nueva Máquina</a>
+        //         </li>
+        //         <li class="">
+        //             <a class="enlaceNav inactivo" href="#" id='modificaMaquina' data-option='modificaMaquina'>Modificar Máquina</a>
+        //         </li>      `)
+        //     let subMenuLi = subMenu.querySelectorAll('li a');
+        //     let altaMaquina = document.getElementById('altaMaquina');
+        //     altaMaquina.addEventListener('click', (event) => {
 
-                for (let i of subMenuLi) {
-                    i.classList.remove('activo');
-                    i.classList = "inactivo";
-                }
-                altaMaquina.classList = "enlaceNav activo";
+        //         for (let i of subMenuLi) {
+        //             i.classList.remove('activo');
+        //             i.classList = "inactivo";
+        //         }
+        //         altaMaquina.classList = "enlaceNav activo";
 
-                //aqui el formulario de alta de maquina
-                handler(event.currentTarget.dataset.option);
+        //         //aqui el formulario de alta de maquina
+        //         handler(event.currentTarget.dataset.option);
 
-            })
-            let modificaMaquina = document.getElementById('modificaMaquina');
-            modificaMaquina.addEventListener('click', (event) => {
+        //     })
+        //     let modificaMaquina = document.getElementById('modificaMaquina');
+        //     modificaMaquina.addEventListener('click', (event) => {
 
-                for (let i of subMenuLi) {
-                    i.classList.remove('activo');
-                    i.classList = "inactivo";
-                }
-                modificaMaquina.classList = "enlaceNav activo";
-                //aqui el formulario de modificacion de maquina
-                handler(event.currentTarget.dataset.option);
+        //         for (let i of subMenuLi) {
+        //             i.classList.remove('activo');
+        //             i.classList = "inactivo";
+        //         }
+        //         modificaMaquina.classList = "enlaceNav activo";
+        //         //aqui el formulario de modificacion de maquina
+        //         handler(event.currentTarget.dataset.option);
 
-            })
-        })
+        //     })
+        // })
         let menuAvisos = document.getElementById('menuAvisos');
         menuAvisos.addEventListener('click', (event) => {
 
@@ -351,6 +364,106 @@ class La2024View {
                     }
                     changePass.classList = "enlaceNav activo";
                     handler(event.currentTarget.dataset.option);
+                })
+            })
+            let menuClientes = document.getElementById('menuClientes');
+            menuClientes.addEventListener('click', (event) => {
+                for (let i of navBar) {
+                    i.classList.remove('activo');
+                    i.classList = "inactivo";
+                }
+                menuClientes.classList = "enlaceNav activo";
+                console.log(event.currentTarget.dataset.option);//se puede coger el data-option
+                handler(event.currentTarget.dataset.option);
+    
+                let subMenu = document.getElementById('subMenu');
+    
+                subMenu.replaceChildren();
+                subMenu.insertAdjacentHTML('beforeend', `            
+                    <li class="">
+                        <a class="enlaceNav inactivo option" href="#" id='altaCliente' data-option='altaCliente'>Nuevo Cliente</a>
+                    </li>
+                    <li class="">
+                        <a class="enlaceNav inactivo option" href="#" id='modificaCliente' data-option='modificaCliente'>Modificar Cliente</a>
+                    </li>    
+                   <!--  <li class="">
+                        <a class="enlaceNav inactivo option" href="#" id='historicoCliente' data-option='historicoCliente'>Histórico Cliente</a>
+                    </li> -->      
+                `)
+                let subMenuLi = subMenu.querySelectorAll('li a');
+                let altaCliente = document.getElementById('altaCliente');
+                altaCliente.addEventListener('click', (event) => {
+                    console.log('pulsado altaCliente')
+    
+                    for (let i of subMenuLi) {
+                        // console.log(i)
+                        i.classList.remove('activo');
+                        i.classList = "inactivo";
+                    }
+                    altaCliente.classList = "enlaceNav activo";
+    
+                    //aqui el formulario de alta cliente
+                    handler(event.currentTarget.dataset.option);
+    
+    
+                })
+                let modificaCliente = document.getElementById('modificaCliente');
+                modificaCliente.addEventListener('click', (event) => {
+    
+                    for (let i of subMenuLi) {
+                        i.classList.remove('activo');
+                        i.classList = "inactivo";
+                    }
+                    modificaCliente.classList = "enlaceNav activo";
+    
+                    // aqui el buscador de clientes
+                    handler(event.currentTarget.dataset.option);
+                })
+            })
+            let menuMaquinas = document.getElementById('menuMaquinas');
+            menuMaquinas.addEventListener('click', (event) => {
+    
+                for (let i of navBar) {
+                    i.classList.remove('activo');
+                    i.classList = "inactivo";
+                }
+                menuMaquinas.classList = "enlaceNav activo";
+                console.log(event.currentTarget.dataset.option);
+                handler(event.currentTarget.dataset.option);
+                let subMenu = document.getElementById('subMenu');
+                subMenu.replaceChildren();
+                subMenu.insertAdjacentHTML('beforeend', `            
+                    <li class="">
+                        <a class="enlaceNav inactivo" href="#" id='altaMaquina' data-option='altaMaquina'>Nueva Máquina</a>
+                    </li>
+                    <li class="">
+                        <a class="enlaceNav inactivo" href="#" id='modificaMaquina' data-option='modificaMaquina'>Modificar Máquina</a>
+                    </li>      `)
+                let subMenuLi = subMenu.querySelectorAll('li a');
+                let altaMaquina = document.getElementById('altaMaquina');
+                altaMaquina.addEventListener('click', (event) => {
+    
+                    for (let i of subMenuLi) {
+                        i.classList.remove('activo');
+                        i.classList = "inactivo";
+                    }
+                    altaMaquina.classList = "enlaceNav activo";
+    
+                    //aqui el formulario de alta de maquina
+                    handler(event.currentTarget.dataset.option);
+    
+                })
+                let modificaMaquina = document.getElementById('modificaMaquina');
+                modificaMaquina.addEventListener('click', (event) => {
+    
+                    for (let i of subMenuLi) {
+                        i.classList.remove('activo');
+                        i.classList = "inactivo";
+                    }
+                    modificaMaquina.classList = "enlaceNav activo";
+                    //aqui el formulario de modificacion de maquina
+                    handler(event.currentTarget.dataset.option);
+    
                 })
             })
         }

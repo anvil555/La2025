@@ -1257,11 +1257,19 @@ article.recycled {
     padding: 5px;
     margin: 5px;
     font-size: 10px;
-    background-color: lightgray;
-    color: maroon;
+    /* background-color: lightgray;
+    color: maroon; */
     border-radius: 3px;
     width: 8%;
     align-items: center;
+}
+.productorArt.inactivo{
+    background-color: lightgray;
+    color: maroon;
+}
+.productorArt.activo{
+    background-color: maroon;
+    color: white;
 }
 
 .productorArt:hover,
@@ -1512,7 +1520,9 @@ article.recycled {
 .btnForm4:active {
     transform: scale(0.9);
 }
-
+#guardarAvisoBtn:disabled{
+    background-color: gray;
+}
 
 /************************** UNICODE ************************************/
 

@@ -142,7 +142,8 @@ class La2024Controller {
             let avisosPendientes = await this[MODEL].getAvisosPendientesSQL();
             let avisosPendientesTool = await this[MODEL].avisoTool();
             let productoresList = await this[MODEL].getProductoresSQL();
-            this[VIEW].showAvisosPendientes(param.orden, avisosPendientes, productoresList);
+            let productor = 'todos';
+            this[VIEW].showAvisosPendientes(param.orden, avisosPendientes, productoresList,productor);
             this[VIEW].bindAvisosPendientes(avisosPendientesTool, this.handlerAvisosPendientes, param);
         } else if (opcion === 'changePass') {
             this[VIEW].showChangePass();
@@ -442,12 +443,12 @@ class La2024Controller {
             await this[MODEL].setEndAvisos(parametro.paramAvisosFinalizados);
             delete parametro.paramAvisosFinalizados;
             let info = await this[MODEL].refreshInfo();
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor);
         } else if (parametro.orden && !parametro.update) {
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList/*,paramProductor*/);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor/*,paramProductor*/);
         } else if (parametro.update == true) {
             await this[MODEL].updateAvisoSQL(parametro);
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor);
             delete parametro.update;
         } else if (parametro.delete == true) {
             console.log('parametro eliminar aviso', parametro);
@@ -455,7 +456,7 @@ class La2024Controller {
             delete parametro.delete;
         } else {
             parametro.orden = 'fechaAsc';
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList/*,paramProductor*/);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor/*,paramProductor*/);
         }
         this[VIEW].bindAvisosPendientes(avisosPendientesTool, this.handlerAvisosPendientes, parametro);
     }
@@ -468,11 +469,11 @@ class La2024Controller {
             // let avisosPendientes = await this[MODEL].getAvisosPendientesSQL();
             let avisosPendientes;
             if (parametro.paramProductor) {
-                avisosPendientes = await this[MODEL].getAvisosPendientesPorProductorSQL(productor);
+                avisosPendientes = await this[MODEL].getAvisosPendientesPorProductorSQL(parametro.paramProductor);
             } else {
                 avisosPendientes = await this[MODEL].getAvisosPendientesSQL();
             }
-            this[VIEW].showAvisosPendientes('fechaAsc', avisosPendientes, productoresList);
+            this[VIEW].showAvisosPendientes('fechaAsc', avisosPendientes, productoresList,parametro.paramProductor);
             let avisosPendientesTool = await this[MODEL].avisoTool();
             this[VIEW].bindAvisosPendientes(avisosPendientesTool, this.handlerAvisosPendientes)
 

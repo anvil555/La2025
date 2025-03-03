@@ -375,9 +375,9 @@ class La2024View {
                 menuClientes.classList = "enlaceNav activo";
                 console.log(event.currentTarget.dataset.option);//se puede coger el data-option
                 handler(event.currentTarget.dataset.option);
-    
+
                 let subMenu = document.getElementById('subMenu');
-    
+
                 subMenu.replaceChildren();
                 subMenu.insertAdjacentHTML('beforeend', `            
                     <li class="">
@@ -394,35 +394,35 @@ class La2024View {
                 let altaCliente = document.getElementById('altaCliente');
                 altaCliente.addEventListener('click', (event) => {
                     console.log('pulsado altaCliente')
-    
+
                     for (let i of subMenuLi) {
                         // console.log(i)
                         i.classList.remove('activo');
                         i.classList = "inactivo";
                     }
                     altaCliente.classList = "enlaceNav activo";
-    
+
                     //aqui el formulario de alta cliente
                     handler(event.currentTarget.dataset.option);
-    
-    
+
+
                 })
                 let modificaCliente = document.getElementById('modificaCliente');
                 modificaCliente.addEventListener('click', (event) => {
-    
+
                     for (let i of subMenuLi) {
                         i.classList.remove('activo');
                         i.classList = "inactivo";
                     }
                     modificaCliente.classList = "enlaceNav activo";
-    
+
                     // aqui el buscador de clientes
                     handler(event.currentTarget.dataset.option);
                 })
             })
             let menuMaquinas = document.getElementById('menuMaquinas');
             menuMaquinas.addEventListener('click', (event) => {
-    
+
                 for (let i of navBar) {
                     i.classList.remove('activo');
                     i.classList = "inactivo";
@@ -442,20 +442,20 @@ class La2024View {
                 let subMenuLi = subMenu.querySelectorAll('li a');
                 let altaMaquina = document.getElementById('altaMaquina');
                 altaMaquina.addEventListener('click', (event) => {
-    
+
                     for (let i of subMenuLi) {
                         i.classList.remove('activo');
                         i.classList = "inactivo";
                     }
                     altaMaquina.classList = "enlaceNav activo";
-    
+
                     //aqui el formulario de alta de maquina
                     handler(event.currentTarget.dataset.option);
-    
+
                 })
                 let modificaMaquina = document.getElementById('modificaMaquina');
                 modificaMaquina.addEventListener('click', (event) => {
-    
+
                     for (let i of subMenuLi) {
                         i.classList.remove('activo');
                         i.classList = "inactivo";
@@ -463,7 +463,7 @@ class La2024View {
                     modificaMaquina.classList = "enlaceNav activo";
                     //aqui el formulario de modificacion de maquina
                     handler(event.currentTarget.dataset.option);
-    
+
                 })
             })
         }
@@ -2130,19 +2130,19 @@ class La2024View {
                 <section class="editorNuevoAviso">
                     <div class="avisoForm">
                         <div class="grupo">
-                            <label for="clienteSlt">Cliente</label>
+                            <label for="clienteSlt">Cliente *</label>
                             <select class="entradaValor2 editable" id="clienteSlt">
                                 <option value="sin">...</option>
                             </select>
                         </div>
                         <div class="grupo">
-                            <label for="chasisSlt">Chasis</label>
+                            <label for="chasisSlt">Chasis *</label>
                             <select class="entradaValor2 editable" id="chasisSlt">
                                 <option value="sin">...</option>
                             </select>
                         </div>
                         <div class="grupo">
-                            <label for="fechaInicio">Inicio</label>
+                            <label for="fechaInicio">Inicio *</label>
                             <input class="entradaValor2" type="date" name="fechaInicio" id="fechaInicio" value="" required="">
                         </div>
                         <div class="grupo">
@@ -2154,7 +2154,7 @@ class La2024View {
                     </div>
                     <div class="avisoForm ">
                         <div class="grupo">
-                            <label for="averia">Avería</label>
+                            <label for="averia">Avería *</label>
                             <textarea class="" name="averiaTxt" id="averiaTxt" placeholder="Avería Indicada"></textarea>
                         </div>
                         <div class="grupo">
@@ -2203,7 +2203,7 @@ class La2024View {
                 <section class="flechaAvisoCont" id="casette">
                     <article class="flechaAviso">&#x23EE;</article>
                     <article class="flechaAviso">&#x23F4;</article>
-                    <input type="text" name="nAvisos" id="nAvisos" value="">
+                    <input type="number" name="nAvisos" id="nAvisos" value="">
                     <article class="flechaAviso">&#x23F5;</article>
                     <article class="flechaAviso">&#x23ED;</article>
                     <article class="flechaAviso">&#x1F7A3;</article>                   
@@ -2225,6 +2225,7 @@ class La2024View {
         let fAvisoCliente = document.getElementById('fAvisoCliente');
         let nAvisosMaquina = document.getElementById('nAvisosMaquina');
         let fAvisoMaquina = document.getElementById('fAvisoMaquina');
+        let nAvisos = document.getElementById('nAvisos');
 
         //asignamos los clientes al select
         mapaClientes.forEach(function (cliente, key) {
@@ -2237,6 +2238,9 @@ class La2024View {
                 clienteSlt.appendChild(optionCliente);
             }
         })
+
+        // pasar este listener a bindNuevoAviso.
+
         // pasamos el valor del select cliente al handler para seleccionar las maquinas del cliente.
         // y la informacion de los avisos del cliente
         clienteSlt.addEventListener('change', () => {
@@ -2249,8 +2253,6 @@ class La2024View {
             infoMaquina.style.border = "none";
             infoCliente.style.boxShadow = "none";
             infoMaquina.style.boxShadow = "none";
-
-
 
             handler(parseInt(clienteSlt.value));
         })
@@ -2294,6 +2296,11 @@ class La2024View {
         }
         averiaTxt.addEventListener('change', (event) => {
             averiaTxt.setCustomValidity("");
+        })
+        //asignamos validacion al campo nAvisos para que sea solo numérico
+        nAvisos.addEventListener('input', (event) => {
+            nAvisos.setCustomValidity("");
+            nAvisos.value = nAvisos.value.replace(/[^0-9]/g, '');//elimina cualquier carácter que no sea un número ([^0-9]) y lo reemplaza con una cadena vacía ('').
         })
 
     }
@@ -2366,7 +2373,6 @@ class La2024View {
         })
         // gestion de productores
         productorSlt.replaceChildren();
-
         mapaProductores.forEach(element => {
             if (element.baja == 0) {
                 let optionProductor = document.createElement('option');
@@ -2384,7 +2390,6 @@ class La2024View {
                 terminadoChk.checked = false;
             }
         })
-
         //gestion de select prioridad
         for (let i = 5; i > 0; i--) {
             let optionPrioridad = document.createElement('option');
@@ -2485,9 +2490,7 @@ class La2024View {
                             param.comando = 3;
                             handler(param);
                             break;
-
                         }
-
                         param.nAvisos = parseInt(nAvisos.value);
                         param.comando = -1;
 
@@ -2498,11 +2501,9 @@ class La2024View {
                         if (nAvisos.value == cantidadAvisos || nAvisos.value == "") {
                             break;
                         }
-
                         param.nAvisos = parseInt(nAvisos.value);
                         param.comando = 2;
 
-                        // nAvisos.value = parseInt(nAvisos.value) + 1;
                         handler(param);
                         break;
                     case '⏭':
@@ -2652,7 +2653,9 @@ class La2024View {
         comentarioTxt.value = aviso.resolucion;
         prioridadSlt.value = aviso.prioridad;
 
-
+        /*****/
+        guardarAvisoBtn.disabled = true;
+        /****/
 
         guardarAvisoBtn.addEventListener('click', (event) => {
             event.preventDefault();
@@ -2931,10 +2934,11 @@ class La2024View {
         }
 
     }
-    showAvisosPendientes(param, avisosPendientes, productoresList) {
-        // console.log('el parametro en view es: ' + param);
-        // console.log('Avisos pendientes en view:', avisosPendientes);
-        // console.log('productores en avisos pendinetes', productoresList)
+    showAvisosPendientes(param, avisosPendientes, productoresList, productorSeleccionado) {
+        console.log('el parametro en view es: ' + param);
+        console.log('Avisos pendientes en view:', avisosPendientes);
+        console.log('productores en avisos pendinetes', productoresList);
+        console.log('productor seleccionado', productorSeleccionado);
 
         this.main.replaceChildren();
 
@@ -2958,13 +2962,22 @@ class La2024View {
         lineaProductores.setAttribute('id', 'lineaProductores');
         cabeceraAvisos.appendChild(lineaProductores);
         let productorArtTodos = document.createElement('article');
-        productorArtTodos.classList.add('productorArt');
+        if (productorSeleccionado == 'todos') {
+            productorArtTodos.classList.add('productorArt', 'activo');
+        } else {
+            productorArtTodos.classList.add('productorArt', 'inactivo');//
+        }
         productorArtTodos.setAttribute('data-productor', 'todos');
         lineaProductores.appendChild(productorArtTodos);
         productorArtTodos.innerHTML = "TODOS";
         productoresList.forEach(productor => {
             let productorArt = document.createElement('article');
-            productorArt.classList.add('productorArt');
+            if (productorSeleccionado == productor.id) {
+                productorArt.classList.add('productorArt', 'activo');
+            } else {
+
+            productorArt.classList.add('productorArt', 'inactivo');//
+            }
             productorArt.setAttribute('data-productor', productor.id);
             if (productor.id == 0) {
                 lineaProductores.appendChild(productorArt);
@@ -3433,11 +3446,15 @@ class La2024View {
         for (const productorBtn of productorArtList) {
             productorBtn.addEventListener('click', (event) => {
                 aviso.paramProductor = event.currentTarget.dataset.productor;
+                // productorArtList.forEach(element => {
+                //     element.classList.toggle('inactivo');
+                // });
+                productorBtn.classList.remove('inactivo');
+                productorBtn.classList.add('activo');
                 handler(aviso);
-
-            })
-
+            });
         }
+
 
         //gestion de las flechas de orden
         let ordenaTabla = document.getElementsByClassName('ordenaTabla');
@@ -4609,8 +4626,8 @@ class La2024View {
            <section class="cabeceraEstadisticas"><h3>APARTADO DE CLIENTES</h3></section>  
              <section id="estadisticas">                 
         `);
-        this.utilChart(mapa.maquinas, "TOP MAQUINAS");
-        this.utilChart(mapa.avisos, "TOP AVISOS")
+        this.utilChart(mapa.maquinas, "TOP PARQUE CLIENTES");
+        this.utilChart(mapa.avisos, "TOP AVISOS CLIENTES")
     }
     showMaquinasView(mapa) {
         this.main.replaceChildren();
@@ -4618,7 +4635,7 @@ class La2024View {
            <section class="cabeceraEstadisticas"><h3>APARTADO DE MAQUINAS</h3></section>  
              <section id="estadisticas">                 
         `);
-        this.utilChart(mapa.avisos, "TOP MAQUINAS");
+        this.utilChart(mapa.avisos, "TOP ASISTENCIAS A MAQUINAS");
         this.utilChart(mapa.modelos, "TOP MODELOS")
     }
     showAvisosView(mapa) {
@@ -4627,8 +4644,8 @@ class La2024View {
            <section class="cabeceraEstadisticas"><h3>APARTADO DE AVISOS</h3></section>  
              <section id="estadisticas">                 
         `);
-        this.utilChart(mapa.mes, mapa.year);
-        this.utilChart(mapa.tecnico, mapa.year)
+        this.utilChart(mapa.mes, "Vista por meses");
+        this.utilChart(mapa.tecnico, "Carga de Trabajo")
         this.utilChart(mapa.FiveYears, "Ultimos 5 años")
     }
     // utilChart(mapa, label) {

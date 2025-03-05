@@ -32,3 +32,11 @@ añadido powerpoint
 01/03/2025
 
 modificados privilegios de usuarios
+
+04/03/2025
+
+modificada presentacion
+modificado video
+modificada documentacion
+creado manual usuario
+creado manual instalacion

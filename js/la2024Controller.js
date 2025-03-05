@@ -10,12 +10,8 @@ class La2024Controller {
         this[MODEL] = modelLa2024;
         this[VIEW] = viewLa2024;
 
-
-
         if (sessionStorage.getItem('usuario') === 'admin') {
-
             this.onLoad(sessionStorage.getItem('usuario'))
-
         } else {
             let mensaje = "";
             this[VIEW].showLoginModal(this.onLogin, this.onRegister, mensaje);
@@ -56,30 +52,22 @@ class La2024Controller {
         this[VIEW].showMainView(info, mapa);
 
     }
-    onExit = async (usuario) => {
-        console.log('onExit', usuario)
-        switch (usuario) {
+    onExit = async (param) => {
+        console.log('onExit', param)
+        switch (param.option) {
             case "changePassDrop":
-                this[VIEW].showChangePass();
-                this[VIEW].bindChangePass(this.handlerChangePass);
+                this[VIEW].showChangePassModal("");
+                this[VIEW].bindChangePass(this.handlerChangePassModal, param.userId);
                 break;
             case "deleteUserDrop":
                 let user = await this[MODEL].getServerSession();
-
                 user.userId = user.id;
                 user.delete = true;
-
                 console.log('Autoborrado de Perfil', user);
-
                 this[VIEW].showInfoModalRemoveUsuario(this.handlerRemoveUser, user);
-                /**
-                 * 
-                 * aqui esta el fallo de eliminar el propio usuario
-                 */
-
                 break;
             case "cerrarSesion":
-                console.log('cerramos la sesion de navegador de : ', usuario);
+                console.log('cerramos la sesion de navegador de : ', param.nombreUsuario);
                 // sessionStorage.removeItem('usuario');
                 if (sessionStorage.getItem('usuario') === null) {
                     console.log('La variable ha sido eliminada');
@@ -91,7 +79,6 @@ class La2024Controller {
                 this[VIEW].showWhiteView();
                 let mensaje = "";
                 this[VIEW].showLoginModal(this.onLogin, this.onRegister, mensaje);
-
                 break;
 
             default:
@@ -143,11 +130,11 @@ class La2024Controller {
             let avisosPendientesTool = await this[MODEL].avisoTool();
             let productoresList = await this[MODEL].getProductoresSQL();
             let productor = 'todos';
-            this[VIEW].showAvisosPendientes(param.orden, avisosPendientes, productoresList,productor);
+            this[VIEW].showAvisosPendientes(param.orden, avisosPendientes, productoresList, productor);
             this[VIEW].bindAvisosPendientes(avisosPendientesTool, this.handlerAvisosPendientes, param);
         } else if (opcion === 'changePass') {
-            this[VIEW].showChangePass();
-            this[VIEW].bindChangePass(this.handlerChangePass);
+            this[VIEW].showChangePassModal(mensaje)
+            this[VIEW].bindChangePass(this.handlerChangePassModal, usuario.id);
         } else if (opcion === 'deleteUser') {
             let user = await this[MODEL].getServerSession();
             this[VIEW].showInfoModalRemoveUsuario(this.handlerRemoveUser, user.id);
@@ -196,15 +183,11 @@ class La2024Controller {
             this[VIEW].showConfirmModal(mensaje, this.handlerConfirmModal);
         } else {
             await this[MODEL].addClienteSQL(cliente);
-            // await this[MODEL].getClientesSQL();
-
             let newId = await this[MODEL].getIdClienteSQL(cliente);
             console.log("desde model: ", newId);
 
             let mensaje = "El cliente " + cliente.nombre + " añadido con éxito.";
             this[VIEW].showConfirmModal(mensaje, this.handlerConfirmModal);
-            // this[VIEW].showMainView(await this[MODEL].refreshInfo());
-
             let coleccion = await this[MODEL].busquedaClientesSQL(cliente.nombre);//coleccion de clientes ajax segun datos de input    
             this[VIEW].showCabeceraBusqueda();
             this[VIEW].showListadoClientesEncontrados(coleccion, this.handlerDetalleCliente);//con esta linea mostramos los clientes en formato falsa tabla
@@ -227,11 +210,9 @@ class La2024Controller {
         let coleccion = await this[MODEL].busquedaClientesSQL(nombreCliente);//coleccion de clientes ajax segun datos de input    
 
         this[VIEW].showListadoClientesEncontrados(coleccion, this.handlerDetalleCliente);//con esta linea mostramos los clientes en formato falsa tabla
-        // this[VIEW].bindListadoClientesEncontrados(coleccion, this.handlerUpdateAndDeleteCliente);//y con esta le dotamos de funcionalidad
 
     }
     handlerDetalleCliente = async (idCliente) => {
-        // console.log('idCliente handlerDetalleCliente:', idCliente);
         let cliente = await this[MODEL].getMaquinasPorCliente(idCliente);
 
         //hay que intentar suprimir la coleccion... y mostrar solo el cliente
@@ -286,9 +267,8 @@ class La2024Controller {
         console.log(idCliente);
         this[MODEL].removeClienteSQL(idCliente);
         this[MODEL].removeClienteMap(idCliente);
-        let info = await this[MODEL].refreshInfo();
-        let mapa = await this[MODEL].getAvisosPorAnio();
-        this[VIEW].showMainView(info, mapa);
+        let mapa = await this[MODEL].stadisticsClientes();//cambiar esta estadistica
+        this[VIEW].showClientesView(mapa);
     }
 
     /************************** APARTADO MAQUINAS ****************************/
@@ -309,28 +289,15 @@ class La2024Controller {
             await this[MODEL].addMaquinaSQL(maquina);
             await this[MODEL].getMaquinasSQL();
 
-            // let newChasis = await this[MODEL].getIdMaquinaSQL(maquina);
-            // console.log("desde model: ", newId);
             let mensaje = "La máquina con chasis " + maquina.chasis + " añadida con éxito.";
             this[VIEW].showConfirmModal(mensaje, this.handlerConfirmModal);
 
-
-            // MOSTRAR NUEVO FORMULARIO DE NUEVA MAQUINA 
-            // this[VIEW].showNuevaMaquina(await this[MODEL].getClientesSQL());
-            // this[VIEW].bindNuevaMaquina(this.handlerFormAltaMaquina);
-
-            //O
-
-            //MOSTRAR LA MAQUINA CREADA
-            // let coleccionMaquinas = await this[MODEL].busquedaMaquinasSQL(maquina.chasis);//coleccion de maquinas ajax segun datos de input
             this[VIEW].showCabeceraBusquedaMaquinas();
             this[VIEW].bindBusquedaMaquinas(this.handlerBusquedaMaquina(maquina.chasis));
-            // this[VIEW].showListadoMaquinasEncontradas(coleccionMaquinas, this.handlerDetalleMaquina);//con esta linea mostramos las maquinas en formato falsa tabla
 
         }
     }
     handlerBusquedaMaquina = async (chasisMaquina) => {
-        // console.log('chasisMaquina:', chasisMaquina);
         let coleccionMaquinas = await this[MODEL].busquedaMaquinasSQL(chasisMaquina);//coleccion de maquinas ajax segun datos de input
         this[VIEW].showListadoMaquinasEncontradas(coleccionMaquinas, this.handlerDetalleMaquina);//con esta linea mostramos las maquinas en formato falsa tabla
     }
@@ -339,7 +306,6 @@ class La2024Controller {
         let element = await this[MODEL].maquinaTool(chasis);
 
         let coleccionMaquinas = await this[MODEL].busquedaMaquinasSQL(chasis);//coleccion de maquinas ajax segun datos de input
-        // let coleccionClientes = await this[MODEL].getClientesSQL();
         let coleccionClientesAlta = await this[MODEL].getClientesDeAltaSQL();
 
         this[VIEW].showDetalleMaquina(element);
@@ -422,7 +388,7 @@ class La2024Controller {
     }
 
     handlerAvisosPendientes = async (parametro) => {
-        // console.log('parametro avisos controller', parametro);
+        console.log('parametro avisos controller', parametro);
 
         let productoresList = await this[MODEL].getProductoresSQL();
 
@@ -443,12 +409,12 @@ class La2024Controller {
             await this[MODEL].setEndAvisos(parametro.paramAvisosFinalizados);
             delete parametro.paramAvisosFinalizados;
             let info = await this[MODEL].refreshInfo();
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList, parametro.paramProductor);
         } else if (parametro.orden && !parametro.update) {
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor/*,paramProductor*/);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList, parametro.paramProductor/*,paramProductor*/);
         } else if (parametro.update == true) {
             await this[MODEL].updateAvisoSQL(parametro);
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList, parametro.paramProductor);
             delete parametro.update;
         } else if (parametro.delete == true) {
             console.log('parametro eliminar aviso', parametro);
@@ -456,7 +422,7 @@ class La2024Controller {
             delete parametro.delete;
         } else {
             parametro.orden = 'fechaAsc';
-            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList,parametro.paramProductor/*,paramProductor*/);
+            this[VIEW].showAvisosPendientes(parametro.orden, await avisosPendientes(parametro), productoresList, parametro.paramProductor/*,paramProductor*/);
         }
         this[VIEW].bindAvisosPendientes(avisosPendientesTool, this.handlerAvisosPendientes, parametro);
     }
@@ -473,7 +439,7 @@ class La2024Controller {
             } else {
                 avisosPendientes = await this[MODEL].getAvisosPendientesSQL();
             }
-            this[VIEW].showAvisosPendientes('fechaAsc', avisosPendientes, productoresList,parametro.paramProductor);
+            this[VIEW].showAvisosPendientes('fechaAsc', avisosPendientes, productoresList, parametro.paramProductor);
             let avisosPendientesTool = await this[MODEL].avisoTool();
             this[VIEW].bindAvisosPendientes(avisosPendientesTool, this.handlerAvisosPendientes)
 
@@ -685,15 +651,9 @@ class La2024Controller {
         if (usuario.cancelar && usuario.cancelar == true) {
             let info = await this[MODEL].refreshInfo();
             let mapa = await this[MODEL].getAvisosPorAnio();
-            this[VIEW].showMainView(info, mapa);
         } else {
             await this[MODEL].updatePass(usuario);
             this[VIEW].showConfirmModal("Password Actualizado");
-            let listadoUsuarios = await this[MODEL].getUsuariosSQL();
-            this[VIEW].showListadoUsuarios(listadoUsuarios);
-            let roles = ['admin', 'user'];
-            this[VIEW].bindListadoUsuarios(this.handlerUpdateOrDeleteUsuario, roles);
-
         }
     }
 

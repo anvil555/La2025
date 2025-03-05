@@ -16,6 +16,9 @@ class La2024View {
             console.log(usuario)
             nombreUsuario = usuario.username;
         }
+        let param = {};
+        param.nombreUsuario = nombreUsuario;
+        param.userId = usuario.id;
         this.header.replaceChildren();
         this.header.insertAdjacentHTML('afterbegin', `                        
             <a href="#"><section class="logo" style="background-image:url('./images/logoMolino.png')"></section></a>
@@ -113,14 +116,15 @@ class La2024View {
         for (const option of options) {
             option.addEventListener('click', (event) => {
                 console.log(event.currentTarget.dataset.option);
-                handler(event.currentTarget.dataset.option);
+                param.option = event.currentTarget.dataset.option;
+                handler(param);
             })
 
         }
         let cerrarSesion = document.getElementById('cerrarSesion');
         cerrarSesion.addEventListener('click', (event) => {
 
-            handler(nombreUsuario);
+            handler(param.nombreUsuario);
         })
 
         let dropbtn = document.getElementById('dropbtn');
@@ -143,9 +147,7 @@ class La2024View {
 
     }
     bindNavBar(handler, info) {
-        // console.log('info en bindNAVbAR', info);
         let navBar = document.querySelectorAll('li a');
-
         let home = document.getElementById('home');
         home.addEventListener('click', (event) => {
             for (let i of navBar) {
@@ -160,106 +162,6 @@ class La2024View {
 
         })
 
-        // let menuClientes = document.getElementById('menuClientes');
-        // menuClientes.addEventListener('click', (event) => {
-        //     for (let i of navBar) {
-        //         i.classList.remove('activo');
-        //         i.classList = "inactivo";
-        //     }
-        //     menuClientes.classList = "enlaceNav activo";
-        //     console.log(event.currentTarget.dataset.option);//se puede coger el data-option
-        //     handler(event.currentTarget.dataset.option);
-
-        //     let subMenu = document.getElementById('subMenu');
-
-        //     subMenu.replaceChildren();
-        //     subMenu.insertAdjacentHTML('beforeend', `            
-        //         <li class="">
-        //             <a class="enlaceNav inactivo option" href="#" id='altaCliente' data-option='altaCliente'>Nuevo Cliente</a>
-        //         </li>
-        //         <li class="">
-        //             <a class="enlaceNav inactivo option" href="#" id='modificaCliente' data-option='modificaCliente'>Modificar Cliente</a>
-        //         </li>    
-        //        <!--  <li class="">
-        //             <a class="enlaceNav inactivo option" href="#" id='historicoCliente' data-option='historicoCliente'>Histórico Cliente</a>
-        //         </li> -->      
-        //     `)
-        //     let subMenuLi = subMenu.querySelectorAll('li a');
-        //     let altaCliente = document.getElementById('altaCliente');
-        //     altaCliente.addEventListener('click', (event) => {
-        //         console.log('pulsado altaCliente')
-
-        //         for (let i of subMenuLi) {
-        //             // console.log(i)
-        //             i.classList.remove('activo');
-        //             i.classList = "inactivo";
-        //         }
-        //         altaCliente.classList = "enlaceNav activo";
-
-        //         //aqui el formulario de alta cliente
-        //         handler(event.currentTarget.dataset.option);
-
-
-        //     })
-        //     let modificaCliente = document.getElementById('modificaCliente');
-        //     modificaCliente.addEventListener('click', (event) => {
-
-        //         for (let i of subMenuLi) {
-        //             i.classList.remove('activo');
-        //             i.classList = "inactivo";
-        //         }
-        //         modificaCliente.classList = "enlaceNav activo";
-
-        //         // aqui el buscador de clientes
-        //         handler(event.currentTarget.dataset.option);
-        //     })
-        // })
-        // let menuMaquinas = document.getElementById('menuMaquinas');
-        // menuMaquinas.addEventListener('click', (event) => {
-
-        //     for (let i of navBar) {
-        //         i.classList.remove('activo');
-        //         i.classList = "inactivo";
-        //     }
-        //     menuMaquinas.classList = "enlaceNav activo";
-        //     console.log(event.currentTarget.dataset.option);
-        //     handler(event.currentTarget.dataset.option);
-        //     let subMenu = document.getElementById('subMenu');
-        //     subMenu.replaceChildren();
-        //     subMenu.insertAdjacentHTML('beforeend', `            
-        //         <li class="">
-        //             <a class="enlaceNav inactivo" href="#" id='altaMaquina' data-option='altaMaquina'>Nueva Máquina</a>
-        //         </li>
-        //         <li class="">
-        //             <a class="enlaceNav inactivo" href="#" id='modificaMaquina' data-option='modificaMaquina'>Modificar Máquina</a>
-        //         </li>      `)
-        //     let subMenuLi = subMenu.querySelectorAll('li a');
-        //     let altaMaquina = document.getElementById('altaMaquina');
-        //     altaMaquina.addEventListener('click', (event) => {
-
-        //         for (let i of subMenuLi) {
-        //             i.classList.remove('activo');
-        //             i.classList = "inactivo";
-        //         }
-        //         altaMaquina.classList = "enlaceNav activo";
-
-        //         //aqui el formulario de alta de maquina
-        //         handler(event.currentTarget.dataset.option);
-
-        //     })
-        //     let modificaMaquina = document.getElementById('modificaMaquina');
-        //     modificaMaquina.addEventListener('click', (event) => {
-
-        //         for (let i of subMenuLi) {
-        //             i.classList.remove('activo');
-        //             i.classList = "inactivo";
-        //         }
-        //         modificaMaquina.classList = "enlaceNav activo";
-        //         //aqui el formulario de modificacion de maquina
-        //         handler(event.currentTarget.dataset.option);
-
-        //     })
-        // })
         let menuAvisos = document.getElementById('menuAvisos');
         menuAvisos.addEventListener('click', (event) => {
 
@@ -292,22 +194,17 @@ class La2024View {
                 }
                 nuevoAviso.classList = "enlaceNav activo";
                 handler(event.currentTarget.dataset.option);
-                // showNuevoAviso();
             })
 
             let avisosPendientes = document.getElementById('avisosPendientes');
             avisosPendientes.addEventListener('click', (event) => {
 
                 for (let i of subMenuLi) {
-                    // console.log(i)
                     i.classList.remove('activo');
                     i.classList = "inactivo";
                 }
                 avisosPendientes.classList = "enlaceNav activo";
                 handler(event.currentTarget.dataset.option);
-
-                // showAvisosPendientes('fechaDesc');
-
             })
         })
         let menuAdmin = document.getElementById('menuAdmin');
@@ -328,7 +225,7 @@ class La2024View {
                         <a class="enlaceNav inactivo" href="#" id='nuevoUsuario' data-option='nuevoUsuario'>Nuevo Usuario</a>
                     </li>         
                     <li class="">
-                        <a class="enlaceNav inactivo" href="#" id='adminUsuarios' data-option='adminUsuarios'>Administrar Usuarios</a>
+                        <a class="enlaceNav activo" href="#" id='adminUsuarios' data-option='adminUsuarios'>Administrar Usuarios</a>
                     </li>   
                     `)
                 let subMenuLi = subMenu.querySelectorAll('li a');
@@ -471,6 +368,16 @@ class La2024View {
 
     /*******************************  APARTADO DE CLIENTES *********************************/
     showNuevoCliente() {
+        let today = new Date()
+        // let fechaAlta = document.getElementById('fechaAlta');
+        let dia = today.getDate();
+        let mes = today.getMonth() + 1;
+        let year = today.getFullYear();
+        if (dia < 10) { dia = '0' + dia };
+        if (mes < 10) { mes = '0' + mes };
+
+        let placeholder = year + "-" + mes + "-" + dia;
+        // fechaAlta.value = placeholder;
         this.main.replaceChildren();
         this.main.insertAdjacentHTML('afterbegin', `
         <div class='formularioAlta'>
@@ -482,47 +389,47 @@ class La2024View {
             <section class="editorNuevoCliente">
                 <div class="clienteForm">
                     <div class="grupo">
-                        <label for="nombreCliente">Nombre</label>
+                        <label for="nombreCliente">Nombre*</label>
                         <input class="entradaValor2 editable" type="text" name="nombreCliente" id="nombreCliente"
                             value="" placeholder="Nombre de Cliente" required />
                     </div>
                     <div class="grupo">
-                        <label for="direccionCliente">Direccion</label>
+                        <label for="direccionCliente">Direccion*</label>
                         <input class="entradaValor2 editable" type="text" name="direccionCliente" id="direccionCliente"
                             value="" placeholder="Dirección" required />
                     </div>
                     <div class="grupo">
-                        <label for="poblacionCliente">Poblacion</label>
+                        <label for="poblacionCliente">Población*</label>
                         <input class="entradaValor2 editable" type="text" name="poblacionCliente" id="poblacionCliente"
                             value="" placeholder="Población" required />
                     </div>
                 </div>
                 <div class="clienteForm">
                     <div class="grupo">
-                        <label for="provinciaCliente">Provincia</label>
+                        <label for="provinciaCliente">Provincia*</label>
                         <input class="entradaValor2" type="text" name="provinciaCliente" id="provinciaCliente" value=""
                             placeholder="Provincia" required />
                     </div>
                     <div class="grupo">
                         <label for="contactoCliente">Contacto</label>
                         <input class="entradaValor2" type="text" name="contactoCliente" id="contactoCliente" value=""
-                            placeholder="Contacto" required/>
+                            placeholder="Contacto"/>
                     </div>
                     <div class="grupo">
                         <label for="telefonoCliente">Teléfono</label>
                         <input class="entradaValor2" type="text" name="telefonoCliente" id="telefonoCliente" value=""
-                            placeholder="Teléfono" required/>
+                            placeholder="Teléfono"/>
                     </div>
                 </div>
                 <div class="clienteForm">
                     <div class="grupo">
                         <label for="emailCliente">Correo</label>
                         <input class="entradaValor2" type="email" name="email" id="email" value=""
-                            placeholder="Correo Electrónico" required />
+                            placeholder="Correo Electrónico"/>
                     </div>
                     <div class="grupo">
                         <label for="fechaAlta">Alta</label>
-                        <input class="entradaValor2" type="date" name="fechaAlta" id="fechaAlta" required />
+                        <input class="entradaValor2" type="date" name="fechaAlta" id="fechaAlta" value="${placeholder}" required />
                     </div>
                     
                 </div>
@@ -536,16 +443,7 @@ class La2024View {
     </div>
             `)
 
-        let today = new Date()
-        let fechaAlta = document.getElementById('fechaAlta');
-        let dia = today.getDate();
-        let mes = today.getMonth() + 1;
-        let year = today.getFullYear();
-        if (dia < 10) { dia = '0' + dia };
-        if (mes < 10) { mes = '0' + mes };
-
-        let placeholder = year + "-" + mes + "-" + dia;
-        fechaAlta.value = placeholder;
+     
     }
     bindNuevoCliente(handler) {
         // console.log(handler);
@@ -608,34 +506,23 @@ class La2024View {
             if (nombreCliente.value !== ""
                 && direccionCliente.value !== ""
                 && poblacionCliente.value !== ""
-                && provinciaCliente.value !== ""
-                && contactoCliente.value !== ""
-                && telefonoCliente.value !== ""
-                && email.value !== "") {
+                && provinciaCliente.value !== "") {
                 event.preventDefault();
                 cliente.nombre = nombreCliente.value.toLowerCase();
                 cliente.direccion = direccionCliente.value.toLowerCase();
                 cliente.poblacion = poblacionCliente.value.toLowerCase();
                 cliente.provincia = provinciaCliente.value.toLowerCase();
-                cliente.contacto = contactoCliente.value.toLowerCase();
-                cliente.telefono = telefonoCliente.value;
-                cliente.email = email.value.toLowerCase();
+                if (contactoCliente.value !== "") { cliente.contacto = contactoCliente.value.toLowerCase(); } else { cliente.contacto = ""; }
+                if (telefonoCliente.value !== "") { cliente.telefono = telefonoCliente.value; } else { cliente.telefono = ""; }
+                if (email.value !== "") { cliente.email = email.value.toLowerCase(); } else { cliente.email = ""; }
                 cliente.fechaCreacion = fechaAltaCliente.value;
                 cliente.bajaCliente = 0;
 
-                // console.log(cliente);
                 handler(cliente);
             }
         })
 
-        //gestion de boton cancelar
-        let cancelarClienteBtn = document.getElementById('cancelarClienteBtn');
-        cancelarClienteBtn.addEventListener('click', () => {
-            // this.showMainView(info);
-            let altaMaquina = document.getElementById('altaMaquina');
-            altaMaquina.classList.remove('activo');
-            altaMaquina.classList = 'inactivo';
-        })
+       
     }
     showCabeceraBusqueda() {
         this.main.replaceChildren();
@@ -1323,17 +1210,17 @@ class La2024View {
                 <section class="editorNuevaMaquina">
                     <div class="maquinaForm ">
                         <div class="grupo">
-                            <label for="modelo">Modelo</label>
+                            <label for="modelo">Modelo*</label>
                             <input class="entradaValor2 editable" type="text" name="modelo" id="modelo"
                                 value="" placeholder="Modelo" required />
                         </div>
                         <div class="grupo">
-                            <label for="chasis">Chasis</label>
+                            <label for="chasis">Chasis*</label>
                             <input class="entradaValor2 editable" type="text" name="chasis" id="chasis"
                                 value="" placeholder="Chasis" required />
                         </div>
                         <div class="grupo">
-                            <label for="cliente">Cliente</label>
+                            <label for="cliente">Cliente*</label>
                             <select class="entradaValor2 editable" id="clienteSlt">
                                <option value="sin">Cliente</option>
                             </select>    
@@ -2940,6 +2827,10 @@ class La2024View {
         console.log('productores en avisos pendinetes', productoresList);
         console.log('productor seleccionado', productorSeleccionado);
 
+        if (productorSeleccionado === undefined) {
+            productorSeleccionado = 'todos';
+        }
+
         this.main.replaceChildren();
 
         // opciones de avisos pendientes
@@ -2976,7 +2867,7 @@ class La2024View {
                 productorArt.classList.add('productorArt', 'activo');
             } else {
 
-            productorArt.classList.add('productorArt', 'inactivo');//
+                productorArt.classList.add('productorArt', 'inactivo');//
             }
             productorArt.setAttribute('data-productor', productor.id);
             if (productor.id == 0) {
@@ -3132,7 +3023,7 @@ class La2024View {
             for (const hijo of ordenAvisoProd.children) {
                 if (hijo.classList.contains('pulsadorDesc')) {
                     hijo.remove();
-                } else {
+                } else if (hijo.classList.contains('pulsadorOrden')) {
                     hijo.remove();
                 }
             }
@@ -4069,7 +3960,7 @@ class La2024View {
         this.main.insertAdjacentHTML('afterbegin', `
              <div id="" class="changePassForm">
                 <section class="cabeceraForm">                
-                    <h3 id="tituloLogin">Cambiar Password</h3>                
+                    <h3 id="tituloLogin">Reset Password</h3>                
                 </section>
                 <form id="">
                     <div class="grupoLogin">
@@ -4165,7 +4056,7 @@ class La2024View {
                 <div class="modal-content">                                                                                                             
                    
                         <section class="cabeceraForm">                
-                            <h3 id="tituloLogin">Cambiar Password</h3>                
+                            <h3 id="tituloLogin">Reset Password</h3>                
                         </section>
                         <form id="">
                             <div class="grupoLogin">
@@ -4198,7 +4089,6 @@ class La2024View {
             }
         }
     }
-
     showNuevoUsuario() {
         this.main.replaceChildren();
         this.main.insertAdjacentHTML('afterbegin', `
@@ -4364,12 +4254,12 @@ class La2024View {
                         </article>
                          <article id="" class="">                                               
                             <button class="btnForm4 resetPass" data-usuario="${usuario.id}">
-                                &#9842 PASSWORD
+                                PASSWORD
                             </button>
                         </article>
                          <article id="" class="">  
                             <button class="btnForm4 delUser" data-usuario="${usuario.id}">
-                               &#128465 ELIMINAR
+                                ELIMINAR
                             </button>
                         </article>
                     </div>

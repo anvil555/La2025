@@ -44,3 +44,7 @@ creado manual instalacion
 09/03/2025
 
 Agregada funcionalidad Técnicos
+
+09/03/2025
+
+Agregada Acerca de...

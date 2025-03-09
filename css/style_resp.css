@@ -83,13 +83,14 @@
     margin: 0 !important;
     padding: 0 !important;
   }
-  .infoView{
-    width: 100%;
-    
-  }
-  
 
-  
+  .infoView {
+    width: 100%;
+
+  }
+
+
+
   .estadistica,
   .delUser,
   .grupoImagen,
@@ -109,7 +110,7 @@
   .cabeceraInfoAvisosPendientes,
   .rol,
   .formularioAltaUsuario,
-  #productoresList{
+  #productoresList {
     display: none;
   }
 
@@ -253,12 +254,34 @@
     width: 100%
   }
 
-  .cabeceraEstadisticas h3{
+  .cabeceraEstadisticas h3 {
     width: 80%;
 
   }
-  .infoView{
+
+  .infoView {
     width: 100%;
+  }
+
+  .infoViewAcerca {
+    width: 98%
+  }
+
+  .infoViewAcerca>.grupoInfo {
+    width: 100%
+  }
+
+  .infoViewAcerca>.grupoInfo>label {
+    max-width: 20%;
+  }
+
+  .infoViewAcerca>.grupoInfo>input {
+    width: 100%
+  }
+
+  .infoViewAcerca>.grupoImagen {
+    display: flex;
+    max-height: 20%;
   }
 
 }

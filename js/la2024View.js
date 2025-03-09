@@ -106,6 +106,19 @@ class La2024View {
                 enlaceAdmin.innerHTML = 'Admin';
                 adminLi.appendChild(enlaceAdmin);
                 navBar.appendChild(adminLi);
+                
+
+                let acercaLi = document.createElement('li');
+                let enlaceAcerca = document.createElement('a');
+                enlaceAcerca.classList.add('enlaceNav');
+                enlaceAcerca.classList.add('inactivo');
+                enlaceAcerca.setAttribute('id', 'menuAcerca');
+                enlaceAcerca.setAttribute('data-option', 'menuAcerca');
+                enlaceAcerca.setAttribute('href', '#');
+                enlaceAcerca.innerHTML = 'Acerca de:';
+                acercaLi.appendChild(enlaceAcerca);
+                navBar.appendChild(acercaLi);
+
                 break;
             case "user":
                 // let userLi = document.createElement('li');
@@ -167,7 +180,7 @@ class La2024View {
             home.classList = "enlaceNav activo";
             let subMenu = document.getElementById('subMenu');
             subMenu.replaceChildren();
-            console.log(event.currentTarget.dataset.option);
+            // console.log(event.currentTarget.dataset.option);
             handler(event.currentTarget.dataset.option);
 
         })
@@ -180,7 +193,7 @@ class La2024View {
                 i.classList = "inactivo";
             }
             menuAvisos.classList = "enlaceNav activo";
-            console.log(event.currentTarget.dataset.option);
+            // console.log(event.currentTarget.dataset.option);
             handler(event.currentTarget.dataset.option);
 
             let subMenu = document.getElementById('subMenu');
@@ -226,7 +239,7 @@ class La2024View {
                     i.classList = "inactivo";
                 }
                 menuAdmin.classList = "enlaceNav activo";
-                console.log(event.currentTarget.dataset.option);
+                // console.log(event.currentTarget.dataset.option);
                 handler(event.currentTarget.dataset.option);
                 let subMenu = document.getElementById('subMenu');
                 subMenu.replaceChildren();
@@ -280,7 +293,7 @@ class La2024View {
                     i.classList = "inactivo";
                 }
                 menuClientes.classList = "enlaceNav activo";
-                console.log(event.currentTarget.dataset.option);//se puede coger el data-option
+                // console.log(event.currentTarget.dataset.option);//se puede coger el data-option
                 handler(event.currentTarget.dataset.option);
 
                 let subMenu = document.getElementById('subMenu');
@@ -335,7 +348,7 @@ class La2024View {
                     i.classList = "inactivo";
                 }
                 menuMaquinas.classList = "enlaceNav activo";
-                console.log(event.currentTarget.dataset.option);
+                // console.log(event.currentTarget.dataset.option);
                 handler(event.currentTarget.dataset.option);
                 let subMenu = document.getElementById('subMenu');
                 subMenu.replaceChildren();
@@ -380,7 +393,7 @@ class La2024View {
                     i.classList = "inactivo";
                 }
                 menuTecnicos.classList = "enlaceNav activo";
-                console.log(event.currentTarget.dataset.option);//se puede coger el data-option
+                // console.log(event.currentTarget.dataset.option);//se puede coger el data-option
                 handler(event.currentTarget.dataset.option);
 
                 let subMenu = document.getElementById('subMenu');
@@ -420,6 +433,16 @@ class La2024View {
                     // aqui el buscador de clientes
                     handler(event.currentTarget.dataset.option);
                 })
+            })
+            let menuAcerca = document.getElementById('menuAcerca');
+            menuAcerca.addEventListener('click', (event) => {
+                for (let i of navBar) {
+                    i.classList.remove('activo');
+                    i.classList = "inactivo";
+                }
+                menuAcerca.classList = "enlaceNav activo";
+                // console.log(event.currentTarget.dataset.option);//se puede coger el data-option
+                handler(event.currentTarget.dataset.option);
             })
         }
     }
@@ -4948,6 +4971,41 @@ class La2024View {
     showWhiteView() {
         this.header.replaceChildren();
         this.main.replaceChildren();
+    }
+    showAcercaView(){
+        this.main.replaceChildren();
+        this.main.insertAdjacentHTML('afterbegin', `
+
+        <section class="cabeceraEstadisticas"><h3>ACERCA DE</h3></section>
+        <div class="infoViewAcerca">
+            <div class="grupoInfo">
+                <label for="">Versión</label>
+                <input class="entradaValor2" type="text" name="" id=""
+                    value="1.0" readonly/>
+            </div>                                                    
+            <div class="grupoInfo">
+                <label for="">Fecha</label>
+                <input class="entradaValor2" type="text" name="" id=""
+                    value="09 de marzo de 2025" readonly/>
+            </div>            
+            <div class="grupoInfo">
+                <label for="">Autor</label>
+                <input class="entradaValor2" type="text" name="" id=""
+                    value="Antonio Villajos Brunner" readonly/>
+            </div>
+            <div class="grupoInfo">
+                <label for="">Contacto</label>
+                <input class="entradaValor2" type="text" name="" id=""
+                    value="antonio.villajos.brunner@gmail.com" readonly/>
+            </div>
+            <div class="grupoImagen">
+            <img src="./images/acerca.png" alt="acerca" class="">
+            </div>
+               
+
+        </div>
+        `);
+
     }
 
 }//fin de clase

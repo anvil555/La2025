@@ -174,6 +174,8 @@ class La2024Controller {
             let productores = await this[MODEL].getProductoresSQL();
             this[VIEW].showListadoProductores(productores);
             this[VIEW].bindListadoProductores(this.handlerUpdateOrDeleteProductor);
+        } else if (opcion==='menuAcerca'){
+            this[VIEW].showAcercaView();
         }
     }
 

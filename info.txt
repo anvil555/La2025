@@ -40,3 +40,7 @@ modificado video
 modificada documentacion
 creado manual usuario
 creado manual instalacion
+
+09/03/2025
+
+Agregada funcionalidad Técnicos

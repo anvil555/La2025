@@ -393,4 +393,42 @@ class DaoAviso extends DB
         }
         return $cuenta;
     }
+    function removeAvisosPorCliente($idCliente)
+    {
+        $sql = "DELETE FROM avisos WHERE idCliente = $idCliente;";
+        $this->ConsultaSimple($sql, $this->param);
+    }
+    function removeAvisosPorChasis($chasis)
+    {
+        $sql = "DELETE FROM avisos WHERE chasis = '$chasis';";
+        $this->ConsultaSimple($sql, $this->param);
+    }
+
+    function getCargaDeTrabajo()
+    {
+        $sql = "SELECT productor, count(*) as TOTAL 
+        from avisos 
+        where finalizado=0
+        and productor>0 
+        GROUP by productor;";
+        $this->Consulta($sql, $this->param);
+        $cuenta = [];
+        foreach ($this->datos as $row) {
+            $cuenta[$row['productor']] = $row['TOTAL'];
+        }
+        return $cuenta;
+    }
+    function getTopProductores()
+    {
+        $sql = "SELECT productor, count(*) as TOTAL 
+        from avisos 
+        where finalizado=1 and productor>0 GROUP by productor;
+";
+        $this->Consulta($sql, $this->param);
+        $cuenta = [];
+        foreach ($this->datos as $row) {
+            $cuenta[$row['productor']] = $row['TOTAL'];
+        }
+        return $cuenta;
+    }
 }

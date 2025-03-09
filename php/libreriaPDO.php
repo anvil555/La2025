@@ -6,7 +6,6 @@ class DB
 
 	private $con;
 	private $bbdd="la2025";
-	// private $bbdd="lindepruebas";
 
 	private $host = "localhost";
 	private $usu = "root";

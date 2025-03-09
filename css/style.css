@@ -309,16 +309,16 @@ main {
 }
 
 .elementoBusqueda>article>input {
-/*     border: 0; */
+    /*     border: 0; */
     outline: none;
-    border:0;
+    border: 0;
     border-bottom: 1px solid maroon;
     font-size: 20px
 }
 
 .elementoBusqueda>article>input:focus {
     border: 0;
-        outline: none;
+    outline: none;
 
     border-bottom: 1px solid maroon;
 }
@@ -328,7 +328,8 @@ main {
     color: maroon;
 }
 
-#nClientes, #nMaquinas{
+#nClientes,
+#nMaquinas {
     font-size: 24px;
 }
 
@@ -1263,11 +1264,13 @@ article.recycled {
     width: 8%;
     align-items: center;
 }
-.productorArt.inactivo{
+
+.productorArt.inactivo {
     background-color: lightgray;
     color: maroon;
 }
-.productorArt.activo{
+
+.productorArt.activo {
     background-color: maroon;
     color: white;
 }
@@ -1457,7 +1460,8 @@ article.recycled {
 
 }
 
-#usuariosList {
+#usuariosList,
+#productoresList {
     margin: auto;
     width: 65%;
     border: 1px solid lightgrey;
@@ -1520,8 +1524,56 @@ article.recycled {
 .btnForm4:active {
     transform: scale(0.9);
 }
-#guardarAvisoBtn:disabled{
+
+#guardarAvisoBtn:disabled {
     background-color: gray;
+}
+
+.cabeceraInfoProductores {
+    display: grid;
+    grid-template-columns: 10% 25% 10% 20%;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid maroon;
+    color: maroon;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(239, 222, 222);
+    overflow: auto;
+}
+
+.cabeceraInfoProductores article {
+    margin: auto;
+}
+
+.lineaProductor {
+    display: grid;
+    grid-template-columns: 10% 25% 10% 20%;
+}
+
+.lineaProductor article {
+    height: 30px;
+    /*     border:1px solid red; */
+}
+
+.lineaProductor article input {
+    width: 100%
+}
+
+.colDobleProductor {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+
+.colDobleProductor .btnForm4 {
+    width: 35%;
+    margin-left: 30px
+}
+.lineaProductor article .nombreProductorClass:focus{
+    background-color: lightyellow;
 }
 
 /************************** UNICODE ************************************/

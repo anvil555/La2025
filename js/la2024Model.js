@@ -447,22 +447,10 @@ const Manager = (function () {
             }
             await this.refreshInfo();
 
-
-
-
             //get cliente y si esta de baja y damos de alta la maquina
             //dar de alta el ciente
 
 
-
-
-
-
-
-
-
-
-            await this.refreshInfo();
         }
         updateMaquinaMap(maquina) {
             if (!maquina instanceof Maquina) {
@@ -757,6 +745,28 @@ const Manager = (function () {
                     }
                 }
                 return pathImagen;
+            }
+        }
+        async removeMaquinasClienteSQL(idCliente) {
+            let formData = new FormData();
+            formData.append('removeMaquinasCliente', idCliente);
+            fetch('./php/utilMaquinas.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => response.text())
+                .then((body) => {
+                    console.log(body);
+                }
+                )
+            this.removeMaquinasPorClienteMap(idCliente);
+            await this.refreshInfo();
+        }
+        removeMaquinasPorClienteMap(idCliente) {
+            for (const [chasis, maquina] of this.#maquinas) {
+                if (maquina.cliente == idCliente) {
+                    this.#maquinas.delete(chasis);
+                }
             }
         }
 
@@ -1220,6 +1230,50 @@ const Manager = (function () {
                 console.error('error', error);
             }
         }
+        async removeAvisosPorClienteSQL(idCliente) {
+            let formData = new FormData();
+            formData.append('removeAvisosPorCliente', idCliente);
+            fetch('./php/utilAvisos.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => response.text())
+                .then((body) => {
+                    console.log(body);
+                }
+                )
+            this.removeAvisosPorClienteMap(idCliente);
+            await this.refreshInfo();
+        }
+        removeAvisosPorClienteMap(idCliente) {
+            for (const [id, aviso] of this.#avisos) {
+                if (aviso.idCliente == idCliente) {
+                    this.#avisos.delete(id);
+                }
+            }
+        }
+        async removeAvisosPorChasisSQL(chasis) {
+            let formData = new FormData();
+            formData.append('removeAvisosPorChasis', chasis);
+            fetch('./php/utilAvisos.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => response.text())
+                .then((body) => {
+                    console.log(body);
+                }
+                )
+            this.removeAvisosPorChasisMap(chasis);
+            await this.refreshInfo();
+        }
+        removeAvisosPorChasisMap(chasis) {
+            for (const [id, aviso] of this.#avisos) {
+                if (aviso.chasis == chasis) {
+                    this.#avisos.delete(id);
+                }
+            }
+        }
 
 
         /*************************** GESTION DE PRODUCTORES ******************************/
@@ -1283,6 +1337,115 @@ const Manager = (function () {
                 console.error('Error fetching forklift data:', error);
             }
         }
+        async addProductorSQL(productor) {
+            console.log("productor en model para add:", productor);
+            let jsonProductor = JSON.stringify(productor);
+            let formData = new FormData();
+            formData.append('addProductor', jsonProductor);
+
+            try {
+                let response = await fetch('./php/utilProductores.php', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                let body = await response.text();
+                console.log(body);
+
+                if (body === 'false') {
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error al agregar productor:", error);
+                return false;
+            } finally {
+                await this.refreshInfo();
+            }
+        }
+        async getProductor(productor) {
+            let jsonProductor = JSON.stringify(productor);
+            let formData = new FormData();
+            formData.append('getProductor', jsonProductor);
+            try {
+                let response = await fetch('./php/utilProductores.php', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                let body = await response.text();
+                console.log(body);
+
+                if (body === 'false') {
+                    return false;
+
+                }
+            } catch (error) {
+                console.error("Error al comprobar productor:", error);
+                return false;
+            } finally {
+               await this.refreshInfo();
+            }
+
+
+        }
+        async getProductorPorId(idProductor){
+            let formData = new FormData();
+            formData.append('getProductorPorId', idProductor);
+            try {
+                let response = await fetch('./php/utilProductores.php', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                let body = await response.text();
+                console.log(body);
+
+                if (body === 'false') {
+                    return false;
+
+                }
+            } catch (error) {
+                console.error("Error al comprobar productor:", error);
+                return false;
+            } finally {
+              await  this.refreshInfo();
+            }
+        }
+        async removeProductorSQL(idProductor) {
+            let formData = new FormData();
+            formData.append('deleteProductor', idProductor);
+            fetch('./php/utilProductores.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => response.text())
+                .then((body) => {
+                    console.log(body);
+                }
+                )
+            this.#productores.delete(idProductor);
+            await this.refreshInfo();
+        }
+
+        async updateProductorSQL(productor) {
+            let formData = new FormData();
+            formData.append('updateProductor', JSON.stringify(productor));
+            fetch('./php/utilProductores.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => response.text())
+                .then((body) => {
+                    console.log(body);
+                }
+                )
+                // this.#productores.set(productor.id, productor);
+            await this.refreshInfo();
+        }
+
+
+
+
 
         /****************************** GESTION DE LOGIN Y USUARIOS ******************************/
 
@@ -1351,7 +1514,7 @@ const Manager = (function () {
                     body: formData,
                 });
                 const data = await response.json();
-                console.log('usuario php: ', data);
+                // console.log('usuario php: ', data);
                 if (data) {
                     usuario = new Usuario();
                     usuario.id = data.id;
@@ -1574,14 +1737,14 @@ const Manager = (function () {
             formData.append('getAvisosPorAnio', year);
             try {
                 let response = await fetch('./php/utilAvisos.php', {
-                    method: 'POST', // Asegúrate de que estás usando el método POST si envías formData.
+                    method: 'POST', 
                     body: formData
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                let data = await response.json(); 
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
@@ -1600,7 +1763,7 @@ const Manager = (function () {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
@@ -1618,7 +1781,7 @@ const Manager = (function () {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
@@ -1645,7 +1808,7 @@ const Manager = (function () {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
@@ -1663,7 +1826,7 @@ const Manager = (function () {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
@@ -1675,25 +1838,25 @@ const Manager = (function () {
             comboClientes.avisos = await this.getTopClientesAvisos();
             return comboClientes;
         }
-        async getTopMaquinasAvisos(){
+        async getTopMaquinasAvisos() {
             let formData = new FormData();
             formData.append('getTopMaquinasAvisos', 0);
             try {
                 let response = await fetch('./php/utilMaquinas.php', {
-                    method: 'POST', // Asegúrate de que estás usando el método POST si envías formData.
+                    method: 'POST',
                     body: formData
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                let data = await response.json();
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
             }
         }
-        async getModelos(){
+        async getModelos() {
             let formData = new FormData();
             formData.append('getModelos', 0);
             try {
@@ -1705,7 +1868,7 @@ const Manager = (function () {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 let data = await response.json(); // Asegúrate de que response.json() se resuelva correctamente.
-                console.log(data);
+                // console.log(data);
                 return data;
             } catch (error) {
                 console.error("Error al obtener los datos: ", error);
@@ -1716,6 +1879,48 @@ const Manager = (function () {
             comboMaquinas.avisos = await this.getTopMaquinasAvisos();
             comboMaquinas.modelos = await this.getModelos();
             return comboMaquinas;
+        }
+        async getCargaDeTrabajo() {
+            let formData = new FormData();
+            formData.append('getCargaDeTrabajo', 0);
+            try {
+                let response = await fetch('./php/utilAvisos.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                let data = await response.json();
+                // console.log(data);
+                return data;
+            } catch (error) {
+                console.error("Error al obtener los datos: ", error);
+            }
+        }
+        async getTopProductores() {
+            let formData = new FormData();
+            formData.append('getTopProductores', 0);
+            try {
+                let response = await fetch('./php/utilAvisos.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                let data = await response.json();
+                // console.log(data);
+                return data;
+            } catch (error) {
+                console.error("Error al obtener los datos: ", error);
+            }
+        }
+        async stadisticsProductores() {
+            let comboProductores = {};
+            comboProductores.topProductores = await this.getTopProductores();
+            comboProductores.cargaDeTrabajo = await this.getCargaDeTrabajo();
+            return comboProductores;
         }
 
     }//fin de clase

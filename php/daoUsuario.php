@@ -13,7 +13,6 @@ class DaoUsuario extends DB
     {
         parent::__construct();
     }
-
     function addUser($usuario)
     {
         $username = $usuario->__get('username');
@@ -26,7 +25,6 @@ class DaoUsuario extends DB
         VALUES ('$username','$pass','$rol',$baja);";
         $this->ConsultaSimple($sql, $this->param);
     }
-
     function getUser($usuario)
     {   $control = false;
         $username = $usuario->__get('username');

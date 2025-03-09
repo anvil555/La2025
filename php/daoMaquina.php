@@ -300,4 +300,10 @@ class DaoMaquina extends DB
     {
         $sql = "";
     }
+    function removeMaquinasCliente($idCliente)
+    {
+        $sql = "DELETE FROM `maquinas` WHERE cliente = '$idCliente';";
+        $this->ConsultaSimple($sql, $this->param);
+    }
+
 }

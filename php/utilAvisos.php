@@ -128,7 +128,6 @@ if (isset($_POST['addAviso'])) {
     $daoAviso->getAvisosPendientesPorProductor($productor);
     echo json_encode($daoAviso->listado);
 } else if (isset($_POST['setEndAviso'])) {
-
     $idAviso = $_POST['setEndAviso'];
     echo $idAviso;
     $daoAviso->setEndAviso($idAviso);
@@ -144,5 +143,21 @@ if (isset($_POST['addAviso'])) {
     echo json_encode($cuenta);
 } else if (isset($_POST['getAvisosLastFiveYears'])) {
     $cuenta = $daoAviso->getAvisosLastFiveYears();
+    echo json_encode($cuenta);
+} else if (isset($_POST['removeAvisosPorCliente'])) {
+    $idCliente = $_POST['removeAvisosPorCliente'];
+    $daoAviso->removeAvisosPorCliente($idCliente);
+    echo "Avisos cliente " . $idCliente . " eliminados php";
+} else if (isset($_POST['removeAvisosPorChasis'])) {
+    $chasis = $_POST['removeAvisosPorChasis'];
+    $daoAviso->removeAvisosPorChasis($chasis);
+    echo "Avisos maquina " . $chasis . " eliminados php";
+} else if (isset($_POST['getCargaDeTrabajo'])) {
+    $year = $_POST['getCargaDeTrabajo'];
+    $cuenta = $daoAviso->getCargaDeTrabajo();
+    echo json_encode($cuenta);
+} else if (isset($_POST['getTopProductores'])) {
+    $year = $_POST['getTopProductores'];
+    $cuenta = $daoAviso->getTopProductores();
     echo json_encode($cuenta);
 }

@@ -126,4 +126,8 @@ if (isset($_POST['removeMaquina'])) {
 } else if (isset($_POST['getModelos'])) {
     $cuenta = $daoMaquina->getModelos();
     echo json_encode($cuenta);
+} else if (isset($_POST['removeMaquinasCliente'])) {
+    $id = $_POST['removeMaquinasCliente'];
+    $daoMaquina->removeMaquinasCliente($id);
+    echo "Maquinas de cliente " . $id . " eliminadas php";
 }

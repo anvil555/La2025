@@ -13,7 +13,7 @@ class La2024View {
     showNavBar(usuario, handler) {
         let nombreUsuario;
         if (usuario) {
-            console.log(usuario)
+            // console.log(usuario);
             nombreUsuario = usuario.username;
         }
         let param = {};
@@ -85,6 +85,17 @@ class La2024View {
                 maquinaLi.appendChild(enlaceMaquinas);
                 navBar.appendChild(maquinaLi);
 
+                let tecnicoLi = document.createElement('li');
+                let enlaceTecnicos = document.createElement('a');
+                enlaceTecnicos.classList.add('enlaceNav');
+                enlaceTecnicos.classList.add('inactivo');
+                enlaceTecnicos.setAttribute('id', 'menuTecnicos');
+                enlaceTecnicos.setAttribute('data-option', 'menuTecnicos');
+                enlaceTecnicos.setAttribute('href', '#');
+                enlaceTecnicos.innerHTML = 'Técnicos';
+                tecnicoLi.appendChild(enlaceTecnicos);
+                navBar.appendChild(tecnicoLi);
+
                 let adminLi = document.createElement('li');
                 let enlaceAdmin = document.createElement('a');
                 enlaceAdmin.classList.add('enlaceNav');
@@ -121,14 +132,13 @@ class La2024View {
             })
 
         }
+
         let cerrarSesion = document.getElementById('cerrarSesion');
         cerrarSesion.addEventListener('click', (event) => {
-
             handler(param.nombreUsuario);
         })
 
         let dropbtn = document.getElementById('dropbtn');
-
         dropbtn.addEventListener('click', function () {
             console.log('pulsada imagen');
             const dropdownContent = document.getElementById('menuCurrentUser');
@@ -363,6 +373,54 @@ class La2024View {
 
                 })
             })
+            let menuTecnicos = document.getElementById('menuTecnicos');
+            menuTecnicos.addEventListener('click', (event) => {
+                for (let i of navBar) {
+                    i.classList.remove('activo');
+                    i.classList = "inactivo";
+                }
+                menuTecnicos.classList = "enlaceNav activo";
+                console.log(event.currentTarget.dataset.option);//se puede coger el data-option
+                handler(event.currentTarget.dataset.option);
+
+                let subMenu = document.getElementById('subMenu');
+
+                subMenu.replaceChildren();
+                subMenu.insertAdjacentHTML('beforeend', `            
+                    <li class="">
+                        <a class="enlaceNav inactivo option" href="#" id='altaProductor' data-option='altaProductor'>Nuevo Técnico</a>
+                    </li>
+                    <li class="">
+                        <a class="enlaceNav inactivo option" href="#" id='modificaProductor' data-option='modificaProductor'>Modificar Técnico</a>
+                    </li>    
+                     
+                `)
+                let subMenuLi = subMenu.querySelectorAll('li a');
+                let altaProductor = document.getElementById('altaProductor');
+                altaProductor.addEventListener('click', (event) => {
+
+                    for (let i of subMenuLi) {
+                        i.classList.remove('activo');
+                        i.classList = "inactivo";
+                    }
+                    altaProductor.classList = "enlaceNav activo";
+                    handler(event.currentTarget.dataset.option);
+
+
+                })
+                let modificaProductor = document.getElementById('modificaProductor');
+                modificaProductor.addEventListener('click', (event) => {
+
+                    for (let i of subMenuLi) {
+                        i.classList.remove('activo');
+                        i.classList = "inactivo";
+                    }
+                    modificaProductor.classList = "enlaceNav activo";
+
+                    // aqui el buscador de clientes
+                    handler(event.currentTarget.dataset.option);
+                })
+            })
         }
     }
 
@@ -443,7 +501,7 @@ class La2024View {
     </div>
             `)
 
-     
+
     }
     bindNuevoCliente(handler) {
         // console.log(handler);
@@ -522,7 +580,7 @@ class La2024View {
             }
         })
 
-       
+
     }
     showCabeceraBusqueda() {
         this.main.replaceChildren();
@@ -1151,7 +1209,7 @@ class La2024View {
                                         <span class="close">&times;</span>
                                     </article>    
                                     <article class="mensaje">  
-                                        <h4>¿Confirmas que deseas eliminar este registro?</h4> 
+                                        <h5>¿Confirmas que deseas eliminar este cliente y sus máquinas y avisos asociados?</h5> 
                                     </article>                                          
                                 </section>
                                 <section class="botonesModal">
@@ -2822,10 +2880,10 @@ class La2024View {
 
     }
     showAvisosPendientes(param, avisosPendientes, productoresList, productorSeleccionado) {
-        console.log('el parametro en view es: ' + param);
-        console.log('Avisos pendientes en view:', avisosPendientes);
-        console.log('productores en avisos pendinetes', productoresList);
-        console.log('productor seleccionado', productorSeleccionado);
+        // console.log('el parametro en view es: ' + param);
+        // console.log('Avisos pendientes en view:', avisosPendientes);
+        // console.log('productores en avisos pendinetes', productoresList);
+        // console.log('productor seleccionado', productorSeleccionado);
 
         if (productorSeleccionado === undefined) {
             productorSeleccionado = 'todos';
@@ -3428,6 +3486,211 @@ class La2024View {
 
     }
 
+    /******************************* APARTADO DE PRODUCTORES *****************************************/
+
+    showNuevoProductor(mensaje) {
+        let error = "";
+        if (mensaje) {
+            error = mensaje
+        }
+        this.main.replaceChildren();
+        this.main.insertAdjacentHTML('afterbegin', `
+        <div class='formularioAltaUsuario'>
+            <section class="cabeceraForm">
+                <h3>Nuevo Técnico</h3>
+            </section>
+            <form role="form" method="POST">
+                 <div class="grupoLogin">
+                    <label for="idTecnico">ID:</label>
+                    <input class="" type="text" id="idTecnico" name="idTecnico" placeholder="ID" maxlength="3" pattern="9\\d{2}" required title="Debe ser un número que empiece por 9 y tenga 3 dígitos">                </div>
+                <div class="grupoLogin">
+                    <label for="nombreTecnico">Nombre:</label>
+                    <input class="" type="text" id="nombreTecnico" name="nombreTecnico" placeholder="Nombre" required>
+                </div>          
+                <section class="botonesModal">
+                    <button id='registerBtn' class='btnForm3'>Registrar</button>
+                    <button id='cancelarBtn' class='btnForm3'>Cancelar</button>
+                </section> 
+                <p id="error" class="error">${error}</p> 
+            </form>
+        </div>
+        `);
+
+    }
+    bindNuevoProductor(handler) {
+        let registerBtn = document.getElementById('registerBtn');
+        let cancelarBtn = document.getElementById('cancelarBtn');
+        let error = document.getElementById('error');
+        let idTecnico = document.getElementById('idTecnico');
+        let nombreTecnico = document.getElementById('nombreTecnico');
+
+        idTecnico.addEventListener('invalid', function () {
+            this.setCustomValidity('El id es obligatorio');
+        })
+        idTecnico.addEventListener('change', function () {
+            this.setCustomValidity('');
+        })
+        nombreTecnico.addEventListener('invalid', function () {
+            this.setCustomValidity('El nombre es obligatorio');
+        })
+        nombreTecnico.addEventListener('change', function () {
+            this.setCustomValidity('');
+        })
+
+        registerBtn.addEventListener('click', (event) => {
+            if (idTecnico.value !== "" && nombreTecnico.value !== "") {
+                event.preventDefault();
+                let tecnico = {};
+                tecnico.id = idTecnico.value;
+                tecnico.nombre = nombreTecnico.value;
+                tecnico.baja = 0;
+                handler(tecnico);
+            }
+        })
+        cancelarBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            handler();
+        })
+    }
+    showListadoProductores(listadoProductores) {
+        this.main.replaceChildren();
+        this.main.insertAdjacentHTML('beforeend', `
+             <section class="cabeceraEstadisticas"><h3>TÉCNICOS</h3></section>  
+            <section id="productoresList">
+                <div class="cabeceraInfoProductores">                   
+                    <article id="ordenProductorId" class="ordenaTabla" data-orden="id">
+                        <span>ID</span>                        
+                    </article >         
+                    <article id="ordenTecnicoNombre" class="ordenaTabla" data-orden="nombre">
+                        <span>NOMBRE</span>                        
+                    </article >
+                    <article class="ordenaTabla">
+                        <span>BAJA</span>
+                    </article>
+                    <article class="ordenaTabla">
+                        <span>OPCIONES</span>
+                    </article>
+                </div>
+                <div class="contenidoInfoProductor" id="contenidoInfoProductor">
+                </div>   
+            </section>     
+        `);
+
+        let contenidoInfoProductor = document.getElementById('contenidoInfoProductor');
+        contenidoInfoProductor.replaceChildren();
+        //listado de productores
+        for (const [clave, productor] of listadoProductores) {
+            if (productor.id > 0) {
+                contenidoInfoProductor.insertAdjacentHTML('beforeend', `
+                    <div class="divisor collapsible lineaProductor" id="productor${productor.id}" data-productor="${productor.id}">                       
+                        <article class="enlazable">
+                            <input type="text" class="entradaValor2 idProductorClass" value="${productor.id}" readonly  required>
+                        </article>
+                        <article class="enlazable">
+                            <input type="text" class="entradaValor2 nombreProductorClass" value="${productor.nombre}" required>
+                        </article>
+                         <article class="enlazable">
+                            <input class="entradaValor2 checkBaja presuChk" type="checkbox" value="${productor.baja}" />
+                        </article>
+                         <article id="" class="">         
+                            <button class="btnForm4 delProductor" data-productor="${productor.id}">
+                                ELIMINAR
+                            </button>
+                        </article>
+                    </div>                   
+                `);
+            }
+        }
+
+        //gestion de color de lineas de la falsa tabla
+        let divisores = document.querySelectorAll('.divisor');
+        let array = Array.from(divisores);
+        array.forEach(function (value, key) {
+            if (key % 2 != 0) {
+                value.classList.remove('divisor');
+                value.classList = 'divisorGris collapsible lineaProductor';
+            }
+        })
+
+        //gestion de checked's
+        let checkedBajas = document.getElementsByClassName('checkBaja');
+        for (const element of checkedBajas) {
+            if (element.value == 0) {
+                element.checked = false;
+            } else {
+                element.checked = true;
+            }
+        };
+
+    }
+    bindListadoProductores(handler) {
+
+        // gestión de actualización de productores
+        let lineasDeProductores = document.getElementsByClassName('lineaProductor');
+        let contenidoInfoProductor = document.getElementById('contenidoInfoProductor');
+        for (const element of lineasDeProductores) {
+            let valoresProductor = element.querySelectorAll('.entradaValor2');
+            for (const campo of valoresProductor) {
+                let storedId = valoresProductor[0].value;//valor guardado de id
+                let storedName = valoresProductor[1].value;//valor guardado de nombre
+                let storedBaja = valoresProductor[2].value;//valor guardado de baja
+                campo.addEventListener('change', (event) => {
+
+                    // Gestión del valor de los checkboxes cambiados
+                    if (campo.classList.contains('checkBaja')) {
+                        if (campo.checked) {
+                            campo.setAttribute('value', 1);
+                        } else {
+                            campo.setAttribute('value', 0);
+                        }
+                    }
+
+                    let productor = {};
+                    if (valoresProductor[0].value !== "" && valoresProductor[1].value !== "") {
+                        productor.id = valoresProductor[0].value;
+                        productor.nombre = valoresProductor[1].value;
+                        productor.baja = valoresProductor[2].value;
+                        console.log('productor actualizado view', productor);
+                        handler(productor);
+                    }
+                }, true);
+
+                //gestion de campos vacios
+                campo.addEventListener('blur', (event) => {
+                    campo.style.backgroundColor = 'white';
+                    if (campo.value==="") {
+                        if(campo.classList.contains('idProductorClass')){
+                            campo.value = storedId;
+                        }else if(campo.classList.contains('nombreProductorClass')){
+                            campo.value = storedName;
+                        }
+                        
+                    }
+                },true)
+            }
+        }
+
+
+
+        // gestion para eliminar productores    
+
+        let delProductorCol = document.getElementsByClassName('delProductor');
+        for (const delProductorBtn of delProductorCol) {
+            delProductorBtn.addEventListener('click', (event) => {
+                let productor = {};
+                productor.id = parseInt(event.currentTarget.dataset.productor);
+                if (productor.update) {
+                    delete productor.update;
+                }
+               
+                productor.delProductor = true;
+                handler(productor)
+            })
+        }
+
+
+    }
+
     /*******************************  APARTADO DE MODALES y USUARIOS *********************************/
 
     showLoginModal(handlerLogin, handlerRegistro, mensaje) {
@@ -3783,7 +4046,7 @@ class La2024View {
                                         <span class="close">&times;</span>
                                     </article>    
                                     <article class="mensaje">  
-                                        <h4>¿Confirmas que deseas eliminar este registro?</h4> 
+                                        <h4>¿Confirmas que deseas eliminar esta máquina y sus avisos asociados?</h4> 
                                     </article>                                          
                                 </section>
                                 <section class="botonesModal">
@@ -4106,9 +4369,17 @@ class La2024View {
                     <label for="password">Contraseña:</label>
                     <input class="" type="password" id="password" name="password" placeholder="Password" required>
                 </div>
-                    <div class="grupoLogin">
+                <div class="grupoLogin">
                     <label for="confirmPassword">Confirmar:</label>
                     <input class="" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+                
+                <div class="grupoLogin">
+                    <label for="rol">Rol:</label>
+                    <select class="selectUsuario" id="rol" name="rol" required>
+                        <option value="admin">Admin</option>
+                        <option value="user" selected>User</option>
+                    </select>                    
                 </div>
             
                 <section class="botonesModal">
@@ -4124,6 +4395,8 @@ class La2024View {
         let username = document.getElementById('username');
         let password = document.getElementById('password');
         let confirmPassword = document.getElementById('confirmPassword');
+        let rol = document.getElementById('rol');
+
         let error = document.getElementById('error');
 
         if (mensaje) {
@@ -4184,6 +4457,9 @@ class La2024View {
                         user.username = username.value;
                         user.pass = password.value;
                         user.form = true;
+                        if (rol) {
+                            user.rol = rol.value;
+                        }
                         handler(user);
                     } else {
                         error.innerHTML = "Los campos tienen que tener entre 8 y 10 caracteres";
@@ -4344,7 +4620,6 @@ class La2024View {
                     //gestion de rol de usuario
 
 
-
                     let usuario = {};
                     usuario.id = parseInt(element.dataset.usuario);
                     if (campo.classList.contains('usernameValor')) {
@@ -4453,6 +4728,62 @@ class La2024View {
             }
         }
     }
+    showInfoModalRemoveProductor(handler, idProductor) {
+        console.log('productor remove modal', idProductor);
+        let header = document.getElementsByTagName('header')[0];
+
+        header.insertAdjacentHTML('afterbegin',
+            `<!-- MODAL -->
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">                                                                                      
+                                <section class="">
+                                    <article class="cerrar">                                    
+                                        <span class="close">&times;</span>
+                                    </article>    
+                                    <article class="mensaje">  
+                                        <h6>¿Confirmas que deseas eliminar este productor?</h6> 
+                                    </article>                                          
+                                </section>
+                                <section class="botonesModal">
+                                    <button id='aceptarBtn' class='btnForm2'>Aceptar</button>
+                                    <button id='cancelarBtn' class='btnForm2'>Cancelar</button>
+                                </section>                                
+                            </div>
+                        </div>`);
+
+        let modal = document.getElementById("myModal");
+        modal.style.display = "block";
+
+        //gestion de botones modal
+
+        //gestion de boton aceptar y confirmar borrado
+        let aceptarBtn = document.getElementById('aceptarBtn');
+        aceptarBtn.addEventListener('click', () => {
+
+            handler(idProductor);
+            console.log("Productor " + idProductor + " eliminada." );
+            modal.style.display = 'none';
+            this.showConfirmModal("Productor " + idProductor + " eliminado.");
+        })
+
+        //gestion de boton cancelar
+        let cancelarBtn = document.getElementById('cancelarBtn');
+        cancelarBtn.addEventListener('click', () => {
+            modal.style.display = "none";
+        })
+        //gestion de boton cerrar
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = () => {
+            modal.style.display = "none";
+        }
+        //gestion de pulsar fuera del modal
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
 
 
 
@@ -4460,8 +4791,8 @@ class La2024View {
     /************************************* VISTAS PRINCIPALES *******************************/
 
     showMainView(info, mapa) {
-        console.log(info);
-        console.log(mapa);
+        // console.log(info);
+        // console.log(mapa);
 
         this.main.replaceChildren();
         this.main.insertAdjacentHTML('afterbegin', `
@@ -4538,58 +4869,15 @@ class La2024View {
         this.utilChart(mapa.tecnico, "Carga de Trabajo")
         this.utilChart(mapa.FiveYears, "Ultimos 5 años")
     }
-    // utilChart(mapa, label) {
-    //     if (mapa) {
-    //         let estadisticas = document.getElementById('estadisticas');
-    //         let stadCont = document.createElement('article');
-    //         stadCont.classList.add('estadistica');
-    //         estadisticas.appendChild(stadCont);
-
-    //         let labels = Object.keys(mapa);
-    //         let values = Object.values(mapa);
-    //         let canvas = document.createElement('canvas');
-    //         stadCont.appendChild(canvas);
-    //         let ctx = canvas.getContext('2d');
-    //         let myBarChart = new Chart(ctx, {
-    //             type: 'bar',
-    //             data: {
-    //                 labels: labels,
-    //                 datasets: [{
-    //                     label: label,
-    //                     data: values,
-    //                     backgroundColor: ['maroon'],
-    //                     borderWidth: 1,
-    //                     barThickness: 20
-    //                 }]
-    //             },
-    //             options: {
-    //                 responsive: true,
-    //                 scales: {
-    //                     y: {
-    //                         beginAtZero: true
-    //                     }
-
-    //                 },
-    //                 plugins: {
-    //                     datalabels: {
-    //                         align: 'end',
-    //                         anchor: 'end',
-    //                         color: 'grey',
-    //                         formatter: function (value, context) {
-    //                             return value;
-    //                         },
-    //                         font: {
-    //                             weight: 'bold'
-    //                         }
-    //                     }
-    //                 }
-    //             },
-    //             plugins: [ChartDataLabels]
-    //         });
-
-    //     }
-    // }
-
+    showProductoresView(mapa) {
+        this.main.replaceChildren();
+        this.main.insertAdjacentHTML('afterbegin', `
+           <section class="cabeceraEstadisticas"><h3>APARTADO DE PRODUCTORES</h3></section>
+                <section id="estadisticas">
+        `);
+        this.utilChart(mapa.cargaDeTrabajo, "CARGA DE TRABAJO");
+        this.utilChart(mapa.topProductores, "TOP PRODUCTORES");
+    }
     utilChart(mapa, label) {
         if (mapa) {
             let estadisticas = document.getElementById('estadisticas');
@@ -4657,7 +4945,6 @@ class La2024View {
             }
         }
     }
-
     showWhiteView() {
         this.header.replaceChildren();
         this.main.replaceChildren();

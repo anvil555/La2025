@@ -21,14 +21,14 @@ class La2024Controller {
     }//fin de constructor
 
     onLogin = async (user) => {
-        console.log('user de modal', user);
+        // console.log('user de modal', user);
         try {
             let registro = await this[MODEL].loginApp(user);
 
             if (registro && registro === true) {
-                console.log("Usuario ha iniciado sesión con éxito");
+                // console.log("Usuario ha iniciado sesión con éxito");
                 let usuario = await this[MODEL].getServerSession();
-                console.log('usuario.php en controller', usuario);
+                // console.log('usuario.php en controller', usuario);
                 // sessionStorage.setItem('usuario', user.nombre);//variable de sesion en el navegador
                 this.onLoad(usuario);
             } else {
@@ -164,7 +164,16 @@ class La2024Controller {
             this[VIEW].showListadoUsuarios(listadoUsuarios);
             let roles = ['admin', 'user'];
             this[VIEW].bindListadoUsuarios(this.handlerUpdateOrDeleteUsuario, roles);
-
+        } else if (opcion === "menuTecnicos") {
+            let mapa = await this[MODEL].stadisticsProductores();
+            this[VIEW].showProductoresView(mapa);
+        } else if (opcion === 'altaProductor') {
+            this[VIEW].showNuevoProductor();
+            this[VIEW].bindNuevoProductor(this.handlerNuevoProductor);
+        } else if (opcion === 'modificaProductor') {
+            let productores = await this[MODEL].getProductoresSQL();
+            this[VIEW].showListadoProductores(productores);
+            this[VIEW].bindListadoProductores(this.handlerUpdateOrDeleteProductor);
         }
     }
 
@@ -265,7 +274,9 @@ class La2024Controller {
     }
     handlerRemoveCliente = async (idCliente) => {
         console.log(idCliente);
-        this[MODEL].removeClienteSQL(idCliente);
+        await this[MODEL].removeAvisosPorClienteSQL(idCliente);
+        await this[MODEL].removeMaquinasClienteSQL(idCliente);
+        await this[MODEL].removeClienteSQL(idCliente);
         this[MODEL].removeClienteMap(idCliente);
         let mapa = await this[MODEL].stadisticsClientes();//cambiar esta estadistica
         this[VIEW].showClientesView(mapa);
@@ -343,6 +354,8 @@ class La2024Controller {
     }
     handlerRemoveMaquina = async (idMaquina) => {
         console.log('idMaquina delete', idMaquina);
+        let storedMaquina = await this[MODEL].getMaquinaPodIdSQL(idMaquina);
+        await this[MODEL].removeAvisosPorChasisSQL(storedMaquina.chasis);
         this[MODEL].removeMaquinaSQL(idMaquina);
         this[MODEL].removeMaquinaMap(idMaquina);
         let info = await this[MODEL].refreshInfo();
@@ -363,7 +376,6 @@ class La2024Controller {
 
 
     }
-
     handlerFormNuevoAviso = async (aviso) => {
         console.log('Nuevo Aviso', aviso);
         if (aviso.info == true) {
@@ -386,7 +398,6 @@ class La2024Controller {
             this[VIEW].bindFlechaBotones(this.handlerNavegadorAvisos, cantidadAvisos);
         }
     }
-
     handlerAvisosPendientes = async (parametro) => {
         console.log('parametro avisos controller', parametro);
 
@@ -496,7 +507,6 @@ class La2024Controller {
                 break;
         }
     }
-
     handlerUpdateAvisoGuardado = async (aviso) => {
         console.log('aviso a actualizar:', aviso);
         if (aviso && aviso.reset == true) {
@@ -577,11 +587,13 @@ class La2024Controller {
 
         } else {
             console.log("si usuario en nuevo: ", usuario);
-            usuario.rol = 'user';
+            if (!usuario.rol) {
+                usuario.rol = 'user';
+            }
             usuario.baja = 0;
 
             let newUser = await this[MODEL].addUsuarioSQL(usuario);
-            console.log('new user ', newUser);
+            // console.log('new user ', newUser);
 
 
             if (newUser == false) {
@@ -657,6 +669,54 @@ class La2024Controller {
         }
     }
 
+    /*************************** APARTADO PRODUCTORES **************************/
+    handlerNuevoProductor = async (productor) => {
+        console.log('Productor en controller', productor);
+        if (productor) {
+            let storedProductor = await this[MODEL].getProductorPorId(productor.id);
+            if (storedProductor == false) {
+                await this[MODEL].addProductorSQL(productor);
+                let mensaje = "Productor añadido con éxito";
+                this[VIEW].showConfirmModal(mensaje);
+                //mostrar listado de productores
+                let listadoProductores = await this[MODEL].getProductoresSQL();
+                this[VIEW].showListadoProductores(listadoProductores);
+                this[VIEW].bindListadoProductores(this.handlerUpdateOrDeleteProductor);
+
+            } else {
+                let mensaje = "Ya existe un productor con el id " + productor.id;
+                this[VIEW].showNuevoProductor(mensaje);
+            }
+        } else {
+            let mapa = await this[MODEL].stadisticsProductores();
+            this[VIEW].showProductoresView(mapa);
+        }
+
+    }
+    handlerUpdateOrDeleteProductor = async (productor) => {
+        console.log('Productor en controller', productor);
+        if (productor.delProductor && productor.delProductor == true) {
+            this[VIEW].showInfoModalRemoveProductor(this.handlerRemoveProductor, productor.id);
+            delete productor.delProductor;
+        } else {
+            // let storedProductor = await this[MODEL].getProductorPorId(productor.id);
+            // if (storedProductor == false) {
+                this[MODEL].updateProductorSQL(productor);
+            // } else {
+            //     let mensaje = "Ya existe un productor con el id " + productor.id;
+            //     this[VIEW].showConfirmModal(mensaje);
+            // }
+        }
+    }
+
+    handlerRemoveProductor = async (idProductor) => {
+        console.log('productor a eliminar', idProductor);
+        await this[MODEL].removeProductorSQL(idProductor);
+        let listadoProductores = await this[MODEL].getProductoresSQL();
+        this[VIEW].showListadoProductores(listadoProductores);
+        this[VIEW].bindListadoProductores(this.handlerUpdateOrDeleteProductor);
+
+    }
 
 
 

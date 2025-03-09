@@ -241,7 +241,6 @@ class Daocliente extends DB
         $this->ConsultaSimple($sql, $this->param); //le pasamos los datos a la funcion de la clase padre.
 
     }
-
     function getClientesParaAvisosSQL()
     {
         $sql = "SELECT clientes.*, count(maquinas.cliente) AS cuenta_maquinas 
@@ -344,7 +343,6 @@ class Daocliente extends DB
 
         return $resultados;
     }
-
     function getTopClientesMaquinas(){
         $sql="SELECT clientes.nombre AS NOMBRE, count(maquinas.cliente) as TOTAL 
         from maquinas join clientes on clientes.id=maquinas.cliente 

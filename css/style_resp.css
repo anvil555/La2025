@@ -89,11 +89,15 @@
   }
   
 
+  
   .estadistica,
   .delUser,
   .grupoImagen,
   #menuClientes,
   #menuMaquinas,
+  #menuTecnicos,
+  #altaProductor,
+  #modificaProductor,
   #changePass,
   #deleteUser,
   #nuevoUsuario,
@@ -103,7 +107,9 @@
   .elementoBusqueda,
   #cabeceraDatosClientes,
   .cabeceraInfoAvisosPendientes,
-  .rol {
+  .rol,
+  .formularioAltaUsuario,
+  #productoresList{
     display: none;
   }
 

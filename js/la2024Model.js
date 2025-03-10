@@ -1,5 +1,5 @@
 import { Cliente, Maquina, Aviso, Productor, Usuario } from "./objetos.js";
-import { LindeException, LindeCustomerException, LindeForkliftException, LindeWorkOrderException, LindeServer } from "./exceptions.js";
+import {La2025Exception } from "./exceptions.js";
 
 const Manager = (function () {
     let manager;
@@ -14,7 +14,7 @@ const Manager = (function () {
         #info = {};
 
         constructor(name) {
-            if (!new.target) throw new LindeException();
+            if (!new.target) throw new La2025Exception();
             Object.defineProperty(this, "name", {
                 enumerable: true,
                 get() {
@@ -38,7 +38,7 @@ const Manager = (function () {
                         // console.log("Add cliente Temp: ", temp);
 
                     }
-                } catch (LindeCustomerException) {
+                } catch (La2025Exception) {
                     console.error
                 }
             }
@@ -381,7 +381,7 @@ const Manager = (function () {
                         let temp = this.createMaquina(element);
                         this.#maquinas.set(temp.chasis, temp);
                     }
-                } catch (LindeForkliftException) {
+                } catch (La2025Exception) {
                     console.error
                 }
             }
@@ -800,7 +800,7 @@ const Manager = (function () {
                         let temp = this.createAviso(element);
                         this.#avisos.set(temp.id, temp);
                     }
-                } catch (LindeWorkOrderException) {
+                } catch (La2025Exception) {
                     console.error
                 }
             }
@@ -1287,7 +1287,7 @@ const Manager = (function () {
                         let temp = this.createProductor(element);
                         this.#productores.set(temp.id, temp);
                     }
-                } catch (LindeException) {
+                } catch (La2025Exception) {
                     console.error
                 }
             }
@@ -1458,7 +1458,7 @@ const Manager = (function () {
                         let temp = this.createUsuario(element);
                         this.#usuarios.set(temp.id, temp);
                     }
-                } catch (LindeException) {
+                } catch (La2025Exception) {
                     console.error
                 }
             }

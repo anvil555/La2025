@@ -111,10 +111,10 @@ if (isset($_POST['username']) && isset($_POST['pass'])) {
 
         echo json_encode($usuario);
     } else {
-        echo "no hay sesion que valga";
+        echo "Se ha cerrado la sesión.";
     }
     // session_destroy();
-    echo "Sesión servidor cerrada php";
+    echo " Sesión servidor cerrada php";
 } else if (isset($_POST['getCuentaUsuarios'])) {
     $cuenta = $daoUsuario->getCuentaUsuarios();
     echo $cuenta;

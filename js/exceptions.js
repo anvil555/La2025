@@ -5,44 +5,11 @@ class BaseException extends Error {
 
     }
 }
-
-class LindeException extends BaseException {
+class La2025Exception extends BaseException {
     constructor() {
         super();
-        this.name = "LindeException";
-        this.message = "Error en la aplicación de Linde";
+        this.name = "La2025Exception";
+        this.message = "Error en la aplicación del proyecto";
     }
 }
-class LindeCustomerException extends BaseException{
-    constructor(){
-        super();
-        this.name = "LindeCustomerException";
-        this.message="El cliente ya existe en la coleccion";
-    }
-}
-class LindeForkliftException extends BaseException{
-    constructor(){
-        super();
-        this.name = "LindeForkliftException";
-        this.message="La carretilla ya existe en la coleccion";
-    }
-}
-
-class LindeWorkOrderException extends BaseException{
-    constructor(){
-        super();
-        this.name = "LindeWorkOrderException";
-        this.message="El aviso ya existe en la coleccion";
-    }
-}
-
-class LindeServer extends BaseException{
-    constructor(){
-        super();
-        this.name = "LindeServer";
-        this.message="El aviso ya existe en la coleccion";
-    }
-}
-
-
-export { LindeException, LindeCustomerException, LindeForkliftException, LindeWorkOrderException,LindeServer };
+export {La2025Exception };

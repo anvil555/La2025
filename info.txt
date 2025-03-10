@@ -52,3 +52,7 @@ Agregada Acerca de...
 09/03/2025
 
 Modificadas Excepciones para la presentación.
+
+09/03/2025
+
+Modificado manual de usuario con la nueva funcionalidad de la aplicación.
